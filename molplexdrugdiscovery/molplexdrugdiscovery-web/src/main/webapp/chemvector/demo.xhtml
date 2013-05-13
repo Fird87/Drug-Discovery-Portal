@@ -26,8 +26,8 @@
 		<script
 			src="#{facesContext.externalContext.requestContextPath}/chemvector/lib/chemvector.js"></script>
 		<script type='text/JavaScript'>
-		function URL() {
-		    
+		function URL(path) {
+			window.location.href=path;
 		  
 		}
 		function refresh()
@@ -122,7 +122,13 @@ none;" onclick="#{rich:component('chemWriterPanel')}.hide();refresh();return fal
 								<h:graphicImage value="/chemvector/images/cart.jpg"/>
 										
 								</h:commandLink-->
-								<a href="/portal/classic/page-just-added/page-just-added-Ltas/LabRequest" ><img src="#{facesContext.externalContext.requestContextPath}/chemvector/images/cart.jpg"  /></a>
+								
+								<a4j:commandButton image="/chemvector/images/cart.jpg" id="addcart"
+									execute="@this"  
+									actionListener="#{molAction.getShowLabRequestAssign}"
+									oncomplete="URL('/portal/classic/page-just-added/page-just-added-Ltas/LabRequest');" >
+								</a4j:commandButton>
+								
 								
 						</span></td>
 					</tr>
@@ -211,31 +217,31 @@ none;" onclick="#{rich:component('chemWriterPanel')}.hide();refresh();return fal
 					<center>
 								<span> 
 									<a4j:commandButton 
-										value="poor" id="poor" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();" action="#{molAction.pageRatingId('poor')}"
+										value="poor" id="poor" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();refresh();" action="#{molAction.pageRatingId('poor')}"
 										image="/chemvector/images/star_1.png" >
 									</a4j:commandButton>
 								</span> 
 								<span>
 									<a4j:commandButton 
-										value="acceptable" id="acceptable" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();" action="#{molAction.pageRatingId('acceptable')}"
+										value="acceptable" id="acceptable" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();refresh();" action="#{molAction.pageRatingId('acceptable')}"
 										image="/chemvector/images/star_2.png" >
 									</a4j:commandButton>
 								</span> 
 								<span>
 									<a4j:commandButton 
-										value="ok" id="ok" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();" action="#{molAction.pageRatingId('ok')}"
+										value="ok" id="ok" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();refresh();" action="#{molAction.pageRatingId('ok')}"
 										image="/chemvector/images/star_3.png" >
 									</a4j:commandButton>
 								</span> 
 								<span>
 									<a4j:commandButton 
-										value="good" id="good" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();" action="#{molAction.pageRatingId('good')}"
+										value="good" id="good" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();refresh();" action="#{molAction.pageRatingId('good')}"
 										image="/chemvector/images/star_4.png" >
 									</a4j:commandButton>
 								</span>
 								<span>
 									<a4j:commandButton 
-										value="excellent" id="excellent" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();" action="#{molAction.pageRatingId('excellent')}"
+										value="excellent" id="excellent" execute="@this" render="rtTab" oncomplete="#{rich:component('ratingPanel')}.hide();refresh();" action="#{molAction.pageRatingId('excellent')}"
 										image="/chemvector/images/star_5.png" >
 									</a4j:commandButton>
 								</span>

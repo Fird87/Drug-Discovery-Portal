@@ -79,6 +79,7 @@ public class MolAction implements MolDAO {
 	public boolean renderApp =true;
 	public boolean savedlabRequest = false;
 	public List<MolPojo> listmp = new ArrayList<MolPojo>();
+	public List<MolPojo> lstLabrequest = new ArrayList<MolPojo>();
     private List<Integer> selectedList=new ArrayList<Integer>(); 
     List<MolPojo> lstChemistSynth = new ArrayList<MolPojo>();
     HashMap<Integer,MolPojo> addedMap = new HashMap<Integer,MolPojo>(); 
@@ -92,63 +93,16 @@ private MolPojo mPojo;
 	public List<MolPojo> getListmp() {
 		// TODO Auto-generated method stub
 		//System.out.println("-----listmp.size()----" + listmp.size()+showlabRequest);
-		 List<MolPojo> lstLabRequest = new ArrayList<MolPojo>();
-		if (listmp.size() > 0) {
-			showlabRequest = true;
-			if(savedlabRequest==true){
-				for (MolPojo molpojo : listmp) {
-			//		System.out.println("-----addedMap------size----"+addedMap.size());
-					 Iterator it = addedMap.entrySet().iterator();
-					    while (it.hasNext()) {
-					        Map.Entry pairs = (Map.Entry)it.next();
-					      //  System.out.println("Saving into lab request"+pairs.getKey() + " = " + pairs.getValue());
-					        MolPojo mPojo=(MolPojo)pairs.getValue();
-					        Integer rtpId=mPojo.getRtp_id();
-					        Integer assayId=mPojo.getAssayId();
-					        if(molpojo.getRtp_id()==rtpId){
-					        molpojo.setAssayId(assayId);
-					        String query = "SELECT cs.lab_request.lab_request_id,cs.vendor_price,cs.manual_price,cs.vendor_time," +
-					    			" cs.manual_time,cs.vendor_risk,cs.manual_risk,cs.vendor_mg,cs.manual_mg,cs.manager_approval,cs.chemist_synthesis_id " +
-					    			" FROM ChemistSynthesis cs where cs.lab_request.rtp.rtp_id=:rtpId" +
-					    			" and cs.lab_request.assay.assay_id=:assayId";
-					    	Query q = em.createQuery(query);
-
-					    	q.setParameter("rtpId", rtpId);
-					    	q.setParameter("assayId", assayId);
-					    	List<Object[]> list = q.getResultList();
-					    	for (Object[] objects : list) {
-					    		molpojo.setChemist_synthesis_id((Integer) objects[10]);
-					    		molpojo.setLab_request_id((Integer) objects[0]);
-					    		molpojo.setVendor_price((Double) objects[1]);
-					    		molpojo.setManual_price((Double) objects[2]);
-					    		molpojo.setVendor_time((Integer) objects[3]);
-					    		molpojo.setManual_time((Integer) objects[4]);
-					    		molpojo.setVendor_risk((Integer) objects[5]);
-					    		molpojo.setManual_risk((Integer) objects[6]);
-					    		molpojo.setVendor_mg((Integer) objects[7]);
-					    		molpojo.setManual_mg((Integer) objects[8]);
-					    		molpojo.setManager_approval((String) objects[9]);
-					    	    }
-					        break;
-					        }
-					    }
-					    lstLabRequest.add(molpojo);
-				}
-				listmp=lstLabRequest;
-			}
-		}
-		else{
-			showlabRequest = false;
-		}
+		
 		return listmp;
 	}
 
 	public List<MolPojo> getChemisList(List<Integer> lstLabReqId) {
 		// TODO Auto-generated method stub
-		//System.out.println("-----listmp.size()----" + listmp.size()+showlabRequest);
+		System.out.println("-----lstLabrequest.size()----" + lstLabrequest.size());
 		
-		if (listmp.size() > 0) {
-		//	System.out.println("------listmp.size()----"+listmp.size());
+		if (lstLabrequest.size() > 0) {
+			System.out.println("------lstLabReqId.size()----"+lstLabReqId.size());
 			showlabRequest = true;
 			if(savedlabRequest==true){
 				MolPojo molpojo=null;
@@ -192,7 +146,7 @@ private MolPojo mPojo;
 			/*	for (MolPojo molpojo1 : lstChemistSynth) {
 					System.out.println("-----lstLabrequest-----"+molpojo1.getRtp_id()+""+molpojo1.getLab_request_name());
 				}*/
-			//	System.out.println("----lstLabRequest---size--"+lstChemistSynth.size());
+				System.out.println("----lstChemistSynth---size--"+lstChemistSynth.size());
 			
 			}
 		}
@@ -278,6 +232,7 @@ private MolPojo mPojo;
 
 	@SuppressWarnings("unchecked")
 	public List<MolPojo> getCheckedMol(Integer molId,boolean check) {
+		System.out.println("getCheckedMol----");
 		MolPojo molp = null;
 	//	System.out.println("-----Inside getChecked-----" + rtpId
 	//			+ "isChecked ---" + check);
@@ -320,8 +275,9 @@ private MolPojo mPojo;
 
 			}
 		}
+		lstLabrequest=listmp;
 		//System.out.println(" listmp size -------"+listmp.size());
-		return listmp;
+		return lstLabrequest;
 	}
 
 
@@ -335,6 +291,9 @@ private MolPojo mPojo;
 			render=false;
 			renderCol=true;
 			renderApp=true;
+			addedMap=new HashMap<Integer, MolPojo>();
+			lstChemistSynth=new ArrayList<MolPojo>();
+			chemistSynthesis.clear();
 		}
 		else{
 		//	System.out.println("inside else");
@@ -347,8 +306,10 @@ private MolPojo mPojo;
 	}
 	
 	public void resetList(){
-		
+		System.out.println("ResetList----");
 		listmp=new ArrayList<MolPojo>();
+		lstLabrequest=new ArrayList<MolPojo>();
+		addedMap=new HashMap<Integer, MolPojo>();
 	}
 	
 	
@@ -487,17 +448,18 @@ private MolPojo mPojo;
 	}
 	
 	public String saveLabRequest(){
+		System.out.println("save Labe request----");
 		String message="";
 		Integer labRequestId=null;
 		List<Integer> lstAddedLabRequestId=new ArrayList<Integer>();
 		StringBuffer sfLabRequest=new StringBuffer();
 		sfLabRequest.append("--");
 		try{
-		//	  System.out.println("----size of added Map-----"+addedMap.size());
+			  System.out.println("----size of added Map-----"+addedMap.size());
 			 Iterator it = addedMap.entrySet().iterator();
 			    while (it.hasNext()) {
 			        Map.Entry pairs = (Map.Entry)it.next();
-			     
+			        chemistSynthesis.clear();
 			     // avoids a ConcurrentModificationException
 			   Integer molId=(Integer)pairs.getKey();
 			   MolPojo mPojo=(MolPojo)pairs.getValue();
@@ -528,18 +490,18 @@ private MolPojo mPojo;
 			 //   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lab Request Created Succesfully"));
 			    savedlabRequest=true;
 			    lstChemistSynth=getChemisList(lstAddedLabRequestId);
+			    listmp=new ArrayList<MolPojo>();
 		}
 		catch(Exception e){
 			System.out.println("exception here");
 			e.printStackTrace();
 		}
-	 
+	
 		return message;
 		
 	}
 
 public Integer savelab() {
-	 List<Integer> lstLabReqId=new ArrayList<Integer>();
 	    render=true;
 		renderCol=false;
 		renderApp=true;
@@ -923,6 +885,64 @@ public void resetRate(){
 //	System.out.println("---show rating false---");
 	//listmp = new ArrayList<MolPojo>();
 	showRating=false;
+}
+
+public List<MolPojo> getLstLabrequest() {
+	//System.out.println("---inside getLstLabrequest---size of "+lstLabrequest.size());
+	/* List<MolPojo> lstLabRequest1 = new ArrayList<MolPojo>();
+		if (lstLabrequest.size() > 0) {
+			showlabRequest = true;
+			if(savedlabRequest==true){
+				for (MolPojo molpojo : lstLabrequest) {
+			//		System.out.println("-----addedMap------size----"+addedMap.size());
+					 Iterator it = addedMap.entrySet().iterator();
+					    while (it.hasNext()) {
+					        Map.Entry pairs = (Map.Entry)it.next();
+					      //  System.out.println("Saving into lab request"+pairs.getKey() + " = " + pairs.getValue());
+					        MolPojo mPojo=(MolPojo)pairs.getValue();
+					        Integer rtpId=mPojo.getRtp_id();
+					        Integer assayId=mPojo.getAssayId();
+					        if(molpojo.getRtp_id()==rtpId){
+					        molpojo.setAssayId(assayId);
+					        String query = "SELECT cs.lab_request.lab_request_id,cs.vendor_price,cs.manual_price,cs.vendor_time," +
+					    			" cs.manual_time,cs.vendor_risk,cs.manual_risk,cs.vendor_mg,cs.manual_mg,cs.manager_approval,cs.chemist_synthesis_id " +
+					    			" FROM ChemistSynthesis cs where cs.lab_request.rtp.rtp_id=:rtpId" +
+					    			" and cs.lab_request.assay.assay_id=:assayId";
+					    	Query q = em.createQuery(query);
+
+					    	q.setParameter("rtpId", rtpId);
+					    	q.setParameter("assayId", assayId);
+					    	List<Object[]> list = q.getResultList();
+					    	for (Object[] objects : list) {
+					    		molpojo.setChemist_synthesis_id((Integer) objects[10]);
+					    		molpojo.setLab_request_id((Integer) objects[0]);
+					    		molpojo.setVendor_price((Double) objects[1]);
+					    		molpojo.setManual_price((Double) objects[2]);
+					    		molpojo.setVendor_time((Integer) objects[3]);
+					    		molpojo.setManual_time((Integer) objects[4]);
+					    		molpojo.setVendor_risk((Integer) objects[5]);
+					    		molpojo.setManual_risk((Integer) objects[6]);
+					    		molpojo.setVendor_mg((Integer) objects[7]);
+					    		molpojo.setManual_mg((Integer) objects[8]);
+					    		molpojo.setManager_approval((String) objects[9]);
+					    	    }
+					        break;
+					        }
+					    }
+					    lstLabRequest1.add(molpojo);
+				}
+				lstLabrequest=lstLabRequest1;
+			}
+		}
+		else{
+			showlabRequest = false;
+		}*/
+	
+	return lstLabrequest;
+}
+
+public void setLstLabrequest(List<MolPojo> lstLabrequest) {
+	this.lstLabrequest = lstLabrequest;
 }
 
 }

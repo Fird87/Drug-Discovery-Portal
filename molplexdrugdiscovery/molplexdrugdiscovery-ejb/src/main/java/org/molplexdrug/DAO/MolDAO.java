@@ -86,4 +86,6 @@ public interface MolDAO {
 	public void setShowRating(boolean showRating);
 	public void getShowRatingAssign();
 	public void resetRate();
+	public List<MolPojo> getLstLabrequest();
+	public void setLstLabrequest(List<MolPojo> lstLabrequest);
 }

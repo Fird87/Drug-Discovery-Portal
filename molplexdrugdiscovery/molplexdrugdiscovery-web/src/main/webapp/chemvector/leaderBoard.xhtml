@@ -7,7 +7,7 @@
 	<h:head>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
-
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemvector.css" />
 		<link rel="stylesheet" type="text/css"
@@ -26,6 +26,9 @@
 		<script
 			src="#{facesContext.externalContext.requestContextPath}/chemvector/lib/chemvector.js"></script>
 		<script type='text/JavaScript'>
+		function URL(path){
+			window.location.href=path;
+			}
 		function refresh()
 		{
 		   
@@ -70,23 +73,18 @@ if(editor==null){
 	</h:head>
 <h:form>
 
+
 				<rich:panel domElementAttachment="form" show="#{molAction.showlabRequest}" id="leaderBoardPanel">
-	 <f:facet name="header">Lab Request and Lab Synthesis</f:facet>
-		<f:facet name="controls">
-		
-		<h:commandLink  action="#{molAction.resetList()}" 
-		 onclick="#{rich:component('leaderBoardPanel')}.hide();refresh();"
-			 style="font-size:large; color:black; textdecoration:none;">
-	<h:graphicImage value="/resources/images/close-button.gif" />
-</h:commandLink>
-</f:facet>
+			
+	  <f:facet name="header">Lab Request and Lab Synthesis</f:facet>
+	
 <rich:dataTable id="masterTable" value="master" var="dataValues" width="100%"
 					border="1" >
 		        <rich:column>
 		        <f:facet name="header">
 							<h:outputText value="Lab Request" />
 						</f:facet>
-				<rich:dataTable id="lrTab" value="#{molAction.listmp}" var="dataValues" width="100%"
+				<rich:dataTable id="lrTab" value="#{molAction.lstLabrequest}" var="dataValues" width="100%"
 					border="1" >
 					<rich:column  value="column1" var="columns" index="ind" 
 						id="col1">
@@ -114,7 +112,7 @@ if(editor==null){
 			   				<f:selectItems value="#{molAction.getAllAssay(dataValues.rtp_id)}" var="a" itemLabel="#{a.assay_name}"  itemValue="#{a.assay_id}"/>  
 							<f:ajax event="change" render="unit"  execute="@this" listener="#{molAction.getAssayId}" /> 
 							</h:selectOneRadio>
-							<h:outputText id="unit" value="#{molAction.getAssayId(dataValues.rtp_id,assay.assay_id,dataValues.displayeName)}" />
+							<h:outputText id="unit" value="#{molAction.getAssayId(dataValues.molId,dataValues.rtp_id,assay.assay_id,dataValues.displayeName)}" />
 							</div>
 						</rich:column>
 						<f:facet name="footer">
@@ -134,7 +132,7 @@ if(editor==null){
 					border="1" iterationStatusVar="it" >
  <rich:column>
   <f:facet name="header">#</f:facet>
-                #{it.index}
+                #{it.index+1}
  </rich:column>
 						 <rich:column>
                           <f:facet name="header">
@@ -197,63 +195,23 @@ if(editor==null){
  						</rich:column>
  						<rich:column>
  						<a4j:commandLink styleClass="no-decor" render="editGrid" execute="@this" action="#{molAction.assignChemistSynthesisValuetoPopup(csValues)}"
-                    oncomplete="#{rich:component('editPane')}.show()">
+                    oncomplete="#{rich:component('editPane')}.show()" title="Edit this Record" >
                     <h:graphicImage value="/chemvector/images/edit.gif" alt="edit" />
                     <f:setPropertyActionListener target="#{molAction.mPojo}" value="#{csValues}" />
                 </a4j:commandLink>
  						</rich:column>
 						<f:facet name="footer">
 							<h:panelGroup style="display:block; text-align:center">
-								<h:commandButton value="Submit" action="#{molAction.updateChemisSynthesis()}" disabled="#{molAction.renderCol}"></h:commandButton>
+								<h:commandButton value="Submit" action="#{molAction.testRender1()}" disabled="#{molAction.renderCol}"></h:commandButton>
 							</h:panelGroup>
 						</f:facet>
 					
 </rich:dataTable>
 </rich:column>
-<rich:column>
-<f:facet name="header">
-							<h:outputText value="Manager Approval" />
-						</f:facet>
-<rich:dataTable id="MgAprTable" value="#{molAction.chemistSynthesisWaitingForApproval}" var="mgValues" width="100%"
-					border="1" >
-					<rich:column>
-					<f:facet name="header">
-							<h:outputText value="LabRequestName" />
-						</f:facet>
-						<h:outputText value="#{mgValues.lab_request_name}" />
-					</rich:column>
-					<rich:column width="300" value="column3" var="colu" index="ind"
-						id="col3">
-						<f:facet name="header">
-							<h:outputText value="Approve/NotApprove" />
-						</f:facet>
-						<h:panelGrid columns="2">
-							<h:outputText value="Approve" />
-							<h:outputText value=" Not Approve" />
-							<br />
-						</h:panelGrid>
-						<h:panelGrid columns="2">
-						<h:selectBooleanCheckbox value="#{mgValues.approve}" >
-						<f:ajax event="change" execute="@this" 
-								listener="#{molAction.addRecordToApprove(mgValues.chemist_synthesis_id,mgValues)}"/>
-						</h:selectBooleanCheckbox>
-						<h:selectBooleanCheckbox value="#{mgValues.notApprove}" >
-						<f:ajax event="change" execute="@this" 
-								listener="#{molAction.addRecordToApprove(mgValues.chemist_synthesis_id,mgValues)}"/>
-						</h:selectBooleanCheckbox>
-							
-						</h:panelGrid>
-						<f:facet name="footer">
-							<h:panelGroup style="display:block; text-align:center">
-								<a4j:commandButton value="Submit" action="#{molAction.updateManagerApproval()}" disabled="#{molAction.renderApp}"></a4j:commandButton>
-							</h:panelGroup>
-						</f:facet>
-					</rich:column>
-					</rich:dataTable>
-					</rich:column>
+
 				</rich:dataTable>
 					<h:outputText value="&#160;" />
-	
+		
  <rich:popupPanel header="Edit Car Details" id="editPane" domElementAttachment="parent" width="400" height="170">
   <f:facet name="header">Edit Chemist Synthesis</f:facet>
  <f:facet name="controls">
@@ -320,13 +278,33 @@ if(editor==null){
  						</rich:column>
    </rich:dataTable>
    </h:panelGrid>
-   
+   	<center>
    <a4j:commandButton value="Store" action="#{molAction.saveChemistSynthesis(molAction.mPojo.chemist_synthesis_id,chemistSynthesis)}" render="csDataTable"  execute="editPane"
                 oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('editPane')}.hide();}" />
             <a4j:commandButton value="Cancel" onclick="#{rich:component('editPane')}.hide(); return false;" />
+            	</center>
  </rich:popupPanel>
+ <a4j:commandButton image="/chemvector/images/BackToLeaderBoard.gif" id="backtoLb"
+									execute="@this"  
+									actionListener="#{molAction.resetList}"
+									oncomplete="URL('/portal/classic/page-just-added/page-just-added-Ltas');" >
+								</a4j:commandButton>
+ 
  </rich:panel>
 </h:form>
-
+<!-- popup panel -->
+				<a4j:outputPanel ajaxRendered="true">
+					<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+						 autosized="true"
+						show="#{facesContext.maximumSeverity!=null}">
+						<h:messages infoClass="info" errorClass="error" style="color:red"/>
+						<center>
+							<a4j:commandLink value="OK"
+								
+								onclick="#{rich:component('msgPanel')}.hide();"
+								reRender="lrTab" />
+						</center>
+					</rich:popupPanel>
+				</a4j:outputPanel>
 			</f:view>
 			

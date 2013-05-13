@@ -72,14 +72,7 @@ if(editor==null){
 
 				<rich:panel domElementAttachment="form" show="#{molAction.showlabRequest}" id="leaderBoardPanel">
 	 <f:facet name="header">Manager Approval</f:facet>
-		<f:facet name="controls">
-		
-		<h:commandLink  action="#{molAction.resetList()}" 
-		 onclick="#{rich:component('leaderBoardPanel')}.hide();refresh();"
-			 style="font-size:large; color:black; textdecoration:none;">
-	<h:graphicImage value="/resources/images/close-button.gif" />
-</h:commandLink>
-</f:facet>
+	
 <rich:dataTable id="MgAprTable" value="#{molAction.chemistSynthesisWaitingForApproval}" var="mgValues" width="100%"
 					border="1" >
 					<rich:column>
