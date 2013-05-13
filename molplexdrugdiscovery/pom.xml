@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.htc.molplex</groupId>
+	<artifactId>molplexdrugdiscovery</artifactId>
+	<packaging>pom</packaging>
+	<name>DrugDiscovery Portal</name>
+
+	<properties>
+		<example.name>molplexdrugdiscovery</example.name>
+		<org.jboss.bom.gatein-bom.version>1.0.0.Final</org.jboss.bom.gatein-bom.version>
+		<org.richfaces.bom.version>4.3.1.Final</org.richfaces.bom.version>
+	</properties>
+
+	<modules>
+		<module>molplexdrugdiscovery-ear</module>
+		<module>molplexdrugdiscovery-ejb</module>
+		<module>molplexdrugdiscovery-web</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.richfaces</groupId>
+				<artifactId>richfaces-bom</artifactId>
+				<version>${org.richfaces.bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.bom</groupId>
+				<artifactId>gatein-3.5-bom</artifactId>
+				<version>${org.jboss.bom.gatein-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.htc.molplex.drugdicovery</groupId>
+				<artifactId>molplexdrugdiscovery-ejb</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.htc.molplex.drugdicovery</groupId>
+				<artifactId>molplexdrugdiscovery-web</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.htc.molplex.drugdicovery</groupId>
+				<artifactId>molplexdrugdiscovery-ear</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.jboss.portletbridge.extensions.seam</groupId>
+				<artifactId>PortalIdentity</artifactId>
+				<version>1.0.0.B4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.portletbridge</groupId>
+				<artifactId>portletbridge-api</artifactId>
+				<version>3.2.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.portletbridge</groupId>
+				<artifactId>portletbridge-impl</artifactId>
+				<version>3.2.0.Final</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.portletbridge</groupId>
+				<artifactId>portletbridge-extension-richfaces</artifactId>
+				<version>3.2.0.Final</version>
+				<scope>runtime</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- The versions, scopes and types of these dependencies are managed in 
+			gatein-*-bom. You need to name only groupId and artifactId here. Name only 
+			those artifacts you refer to in your code. Look at gatein-*-bom POM file 
+			for the complete list of available artifacts. -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.1_spec</artifactId>
+
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>provided</scope> <!-- added this element -->
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.sandbox.ui.rating</groupId>
+			<artifactId>rating-ui</artifactId>
+			<version>4.3.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+	<version>2.3.0.Final</version>
+
+	<repositories>
+		<repository>
+			<id>JBoss repository</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>java-net</id>
+			<name>Java.net Maven Repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+<repository>
+                    <id>jboss-public-repository-group</id>
+                    <name>JBoss Public Maven Repository Group</name>
+                    <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </repository>
+	</repositories>
+
+</project>

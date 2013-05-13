@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+		<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+		</h:head>
+		<h:body>
+
+			<fieldset>
+				<legend>Create New Groups</legend>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Create New Groups" />
+					</f:facet>
+
+					<h:form id="form">
+   <rich:messages  id="message" ></rich:messages>
+						<h:panelGrid columns="2">
+							<rich:validator event="change">
+								<h:outputText value="Group Name: " />
+								<h:inputText id="group_name" value="#{groups.group_name}"
+									required="true" requiredMessage="You need to insert group name">
+									<f:validateLength minimum="1" maximum="50" />
+									<f:ajax event="blur" render="message"/>
+								</h:inputText>
+								
+								
+
+
+								<h:outputText value="Description: " />
+								<h:inputText id="group_desc" value="#{groups.group_desc}"
+									required="true" requiredMessage="You need to insert decscription">
+									<f:validateLength minimum="1" maximum="50" />
+									<f:ajax event="blur" render="message"/>
+								</h:inputText>
+							
+								
+
+								<h:outputText value="Organisation: " />
+
+								<h:selectOneMenu id="prop" defaultLabel="Select organisation"
+									value="#{organisation.organisation_id}" required="true" style=" width : 130px;" requiredMessage="You need to select organisation" >
+								<f:selectItem itemLabel="Choose"/>
+									<f:selectItems value="#{groupsAction.allOrg}" var="a"
+										itemLabel="#{a.organisation_name}"
+										itemValue="#{a.organisation_id}" />
+ 					<f:ajax event="blur" render="message"/>
+								</h:selectOneMenu>
+						
+
+								<f:facet name="footer">
+									<h:panelGroup style="display:block; text-align:center">
+										<a4j:commandButton value="Add"
+											action="#{groupsAction.addGroups()}" >
+											<f:ajax onevent="@form" render="@form" />
+											</a4j:commandButton>
+										<h:commandButton value="Reset" type="reset" />
+									</h:panelGroup>
+
+								</f:facet>
+							</rich:validator>
+									<!-- <a href="#" onclick="#{rich:component('memberPanel')}.show()">Add members</a> -->
+						</h:panelGrid>
+							<a4j:outputPanel id="myPanel" ajaxRendered="true">
+						<h:outputText value="&#160;" />
+							<rich:dataTable id="group" rows="10" value="#{groupsAction.allgroups}" var="g" columnClasses="col" >
+							<rich:column>
+								<f:facet name="header">Name</f:facet>
+								<h:outputText value="#{g.group_name}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">Organisation</f:facet>
+								<h:outputText value="#{g.organisation.getOrganisation_name()}" />
+							</rich:column>
+							<!-- <rich:column>
+								<f:facet name="header">Member</f:facet>
+								<h:outputText value="#{g.member.getMember_name()}"></h:outputText>
+							</rich:column> -->
+							<rich:column>
+								<f:facet name="header">Group Desc</f:facet>
+								<h:outputText value="#{g.group_desc}"></h:outputText>
+							</rich:column>
+					</rich:dataTable>
+					</a4j:outputPanel>
+						<rich:dataScroller align="left" for="group" maxPages="10" styleClass="scrollerSytle"/>
+			
+					</h:form>
+				<!-- 	popup panel -->
+					<a4j:outputPanel ajaxRendered="true">
+						<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+							autosized="true"
+							show="#{facesContext.maximumSeverity!=null}">
+							<h:messages style="color:red" infoClass="info" errorClass="error"/>
+							<center>
+								<a4j:commandLink value="OK"
+									onclick="#{rich:component('msgPanel')}.hide()" />
+							</center>
+						</rich:popupPanel>
+						</a4j:outputPanel>
+				</rich:panel>
+				</fieldset>
+		</h:body>
+	
+	</f:view>
+
+</ui:composition>

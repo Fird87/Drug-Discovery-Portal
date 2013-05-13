@@ -1,0 +1,9 @@
+/** Insert your own style customizations here. **/
+
+.chemwriter .editor {
+  margin-bottom: 15px;
+}
+
+.chemwriter .painter {
+  padding: 5px;
+}

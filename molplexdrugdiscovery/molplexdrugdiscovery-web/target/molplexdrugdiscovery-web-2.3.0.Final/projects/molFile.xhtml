@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+		<h:head>
+		
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+		
+			<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
+
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemvector.css" />
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/demo.css" />
+		<link rel="stylesheet/chemical" type="application/json"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemistry.json" />
+		<link rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.css"
+			type="text/css" media="screen" />
+		<link rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-custom.css"
+			type="text/css" media="screen" />
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.js"></script>
+
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/chemvector/lib/chemvector.js"></script>
+		<script>
+    var editor;
+      chemvector.browser.ImageLoader.init({
+        // startup parameters here
+   
+      });
+
+      function molfilename(){
+var mol = document.getElementsById('molfile').value;
+alert(mol);
+chemvector.browser.ImageLoader.getImage('myId').getFile();
+var molname = document.getElementsByName('src');
+if(editor==null){
+ editor = chemwriter.loadEditor('editor', {
+    
+    enableClipboard: true,
+    appletPath: '#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-util.jar',
+    enableTools: [
+      'wildcard-atom-bond', 'wildcard-bond',
+      'atom-list', 'increase-r-group', 'decrease-r-group', 'crossed-bond', 'wavy-bond'
+    ],
+    disableImplicitHydrogenCount: ['Sn'],
+    molfile: mol;
+ 
+  });
+  var painter = chemwriter.loadPainter('painter', {
+    
+    molfile: mol;
+}
+#{rich:component('chemWriterPanel')}.show();
+
+          }
+    </script>
+		</h:head>
+		<h:body>
+		
+					<rich:popupPanel id="chemWriterPanel" autosized="true" height="400"
+				width="600" top="200" domElementAttachment="form">
+				<a href="#" onclick="#{rich:component('chemWriterPanel')}.hide()">OK</a>
+		<div id="editor"></div>
+		<div id="painter"></div>
+		
+		
+		</rich:popupPanel>
+		   <h:form id="leaderboardForm">
+           			 
+           			<rich:dataTable value="table"
+						var="m" >
+           	
+					
+						<rich:column>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()" >
+								<div class="structure" contenteditable="true">
+									
+									<object id="myId" width="100%" height="100%"
+										class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/a2_cdl.mol" />
+									</object>
+								
+									</div>
+									</div>
+						</rich:column>
+						
+            
+						</rich:dataTable>
+                 	
+					
+			
+				</h:form>
+			
+			
+			
+			
+		</h:body>
+
+</f:view>

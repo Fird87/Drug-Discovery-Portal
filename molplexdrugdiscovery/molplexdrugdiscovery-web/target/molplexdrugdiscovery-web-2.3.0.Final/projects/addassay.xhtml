@@ -1,0 +1,171 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+		</h:head>
+		<h:body>
+
+            <fieldset>
+            <legend>Add Assay</legend>
+			<rich:panel bodyClass="align">
+				<f:facet name="header">
+					<h:outputText value="Add Assay" />
+				</f:facet>
+
+				<h:form id="form">
+ <rich:messages  id="message" ></rich:messages>
+					<h:panelGrid columns="2" id="panel">
+					
+							<h:outputText value="Assay Name: " styleClass="font" />
+							<h:inputText id="assay_name" value="#{assay.assay_name}"
+								required="true" requiredMessage="You need to insert assay name">
+								<f:validateBean for="assay_name" />
+								 <f:ajax event="blur" render="message"/>
+							</h:inputText>
+							
+							
+							<h:outputText value="Assay Description: " styleClass="font" />
+							<h:inputText id="assay_description"
+								value="#{assay.assay_description}" required="true"
+								requiredMessage="You need to insert assay description">
+ 							<f:ajax event="blur" render="message"/>
+							</h:inputText>
+						
+							<h:outputText value="Protocal: " styleClass="font" />
+							<h:inputText id="assay_protocal" value="#{assay.assay_protocal}"
+								required="true" requiredMessage="You need to insert assay protocal">
+						<f:ajax event="blur" render="message"/>
+							</h:inputText>
+						
+							
+							
+						<h:outputText value="Cost: " styleClass="font" />
+							<h:inputText id="cost_per_compound_pence"
+								value="#{assay.cost_per_compound_pence}" required="true"
+								requiredMessage="You need to insert cost" validatorMessage="You need to insert cost" onfocus="{this.value = ''; }" converter="javax.faces.Integer" converterMessage="Please enter numeric only"> 
+                                 <f:validateDoubleRange for="cost_per_compound_pence" minimum="1"/>
+                                 <f:ajax event="blur" render="message"/>
+							</h:inputText>
+						 
+				
+							<h:outputText value="Compound Property: " styleClass="font" />
+
+							<h:selectOneMenu id="compound_property_id"
+								defaultLabel="Select Compount Property"
+								value="#{compound_properties.compound_property_id}" style=" width : 130px;" required="true" requiredMessage="You need to select compound property" >
+								<f:selectItem itemLabel="Choose" />
+								<f:selectItems value="#{addproperties.allCompoundProperties}"
+									var="a" itemLabel="#{a.compound_property_name}"
+									itemValue="#{a.compound_property_id}" />
+									<f:ajax event="change"  execute="@this"
+								listener="#{assayAction.getCompoundPropertyId}" />
+								 <f:ajax event="blur" render="message"/>
+							</h:selectOneMenu>
+						
+							
+
+
+							<h:outputText value="Target: " styleClass="font" />
+
+							<h:selectOneMenu id="target_id" defaultLabel="Select target"
+								value="#{assay.target_id}" style=" width : 130px;" required="true" requiredMessage="You need to select target" >
+								<f:selectItem itemLabel="Choose"  />
+								<f:selectItems value="#{assayAction.allTarget}" var="t"
+									itemLabel="#{t.target_name}" itemValue="#{t.target_id}" />
+						<f:ajax event="blur" render="message"/>
+							</h:selectOneMenu>
+						
+							<f:facet name="footer">
+								<h:panelGroup style="display:block; text-align:center">
+									<a4j:commandButton value="Add"
+										action="#{assayAction.addAssay()}">
+										<f:ajax onevent="@form" render="@form" />
+										<!--rich:componentControl target="msgPanel" operation="show" /-->
+									</a4j:commandButton>
+									<h:commandButton id="btnReset" value="Reset" type="reset" />
+								</h:panelGroup>
+
+							</f:facet>
+						
+					</h:panelGrid>
+				</h:form>
+				<!-- popup panel -->
+				<a4j:outputPanel ajaxRendered="true">
+					<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+						 autosized="true"
+						show="#{facesContext.maximumSeverity!=null}">
+						<h:messages infoClass="info" errorClass="error" style="color:red"/>
+						<center>
+							<a4j:commandLink value="OK"
+								actionListener="#{assayAction.getAllAssay()}"
+								onclick="#{rich:component('msgPanel')}.hide()"
+								reRender="myPanel" />
+						</center>
+					</rich:popupPanel>
+				</a4j:outputPanel>
+			</rich:panel>
+
+			
+				<a4j:outputPanel id="myPanel" ajaxRendered="true">
+				<h:outputText value="&#160;" />
+					<rich:dataTable value="#{assayAction.allAssay}" var="c" id="assay1"
+						rows="10" ajaxRendered="true">
+						<rich:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{c.assay_name}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{c.assay_description}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">Protocal</f:facet>
+							<h:outputText value="#{c.assay_protocal}" />
+						</rich:column>
+
+						<!-- <rich:column>
+							<f:facet name="header">Property Id</f:facet>
+							<h:outputText value="#{c.compound_properties.compound_property_id}" />
+						</rich:column> -->
+
+						<rich:column>
+							<f:facet name="header">Cost</f:facet>
+							<h:outputText value="#{c.cost_per_compound_pence}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">Target Id</f:facet>
+							<h:outputText value="#{c.target_id}" />
+						</rich:column>
+
+					</rich:dataTable>
+					<rich:dataScroller align="center" for="assay1" maxPages="10"
+						styleClass="pagination-center" />
+
+					<br />
+
+					<!-- h:inputHidden value="#{tabBean.tab}" name="assay">
+						<h:link value="Back to Assay" outcome="/projects/ltas.xhtml">
+
+							<a4j:ajax event="click" render="tp @this" />
+
+						</h:link>
+
+					</h:inputHidden-->
+					<a href="/portal/classic/page-just-added/page-just-added-Ltas">Back to Assay</a>
+					<br />
+				</a4j:outputPanel>
+			</fieldset>
+
+		</h:body>
+	</f:view>
+
+</ui:composition>

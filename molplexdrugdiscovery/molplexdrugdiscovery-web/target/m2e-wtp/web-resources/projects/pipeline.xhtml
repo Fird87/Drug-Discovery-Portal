@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      >
+
+<h:head>
+	<title>PipeLine</title>
+	<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+</h:head>
+<h:body>
+	<h3>PipeLine</h3>
+	<h:form id="pipeline">
+	<a4j:outputPanel id="pipeline" ajaxRendered="true">
+		<rich:dataTable id="pipe_data"  value="#{pipeline.getAllPortfolio()}"
+						var="c" >
+						<f:facet name="header">
+                <rich:columnGroup>
+						<rich:column>
+						<h:outputText value="Portfolio" />
+						</rich:column>
+						<rich:column>
+						<h:outputText value="TPP" />
+						</rich:column>
+						<rich:column>
+							<table><tr><td>HIT</td><td>Lead</td><td>Nominee</td><td>Candidate</td><td>Drug</td></tr></table>
+						</rich:column>
+						</rich:columnGroup>
+						</f:facet>
+						 <rich:column colspan="3" >
+                <rich:collapsibleSubTableToggler for="sbtbl" />
+                <h:outputText value="#{c.portfolioName}" />
+            </rich:column>
+            <rich:collapsibleSubTable value="#{pipeline.getAllTpp(c.portfolioName)}" var="item" id="sbtbl" expandMode="client" expanded="'#{false}" >
+           <ui:param name="" value="" />
+                <rich:column>
+                <h:outputText value=" #{item.portfolioName}" />
+                  
+                </rich:column>
+                <rich:column>
+                     <h:outputText value="#{item.tppName}" />
+                </rich:column>
+                <rich:column>
+                  <h:graphicImage value="/projects/progress-bar.png" height=" #{item.pipeHeight}" width=" #{item.pipeWidth}"></h:graphicImage>
+                </rich:column>
+            </rich:collapsibleSubTable>
+						
+						
+					</rich:dataTable>
+					</a4j:outputPanel>
+	</h:form>
+</h:body>
+</ui:composition>

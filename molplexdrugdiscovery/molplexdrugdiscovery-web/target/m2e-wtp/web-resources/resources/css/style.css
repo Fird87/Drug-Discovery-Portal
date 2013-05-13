@@ -1,0 +1,92 @@
+@CHARSET "ISO-8859-1";
+
+.images {
+	background-image: url("/seam-seamspace/home/images/bg.jpg");
+	background-repeat: no-repeat;
+	height: 150px;
+}
+
+
+
+.center_height{
+			
+	height:100%;
+}
+
+.rf-p-hdr{
+			
+
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	padding: 8px 0px 8px 10px;
+	color: black;
+}
+
+
+
+button, input[type="reset"], input[type="submit"], input[type="button"]{ 
+			border-width: 2px;
+			border-radius: 5px;
+}
+
+.col {
+	width: 100px;
+}
+
+.pagination-center {
+	text-align: center;
+	display: block;
+	background-color: transparent;
+}
+
+.info {
+     color: green;
+}
+.error {
+     color: red;
+}
+
+.font{
+		 font-weight: bold;
+		}
+.align {
+	padding: 10px 0px 20px 140px;
+	width: 50%;
+}
+
+
+
+.scrollerSytle{
+		text-align: center;
+		display: block;
+		background-color: transparent;
+		}
+		
+.headeralign {
+	padding: 10px 0px 20px 140px;
+	width: 55%;
+	align:center;
+}
+
+#slideshow-container {
+ border: 1px solid;
+ border-color: #ffff04;
+ margin: 10px 90px;
+ width: 680px;
+ height: 335px;
+}
+ 
+#slideshow-container img {
+ position: absolute;
+ margin: 0px;
+ width: inherit;
+ height: inherit;
+
+}
+
+.welcomepage{
+	font-family: Lucida Sans;
+}
+

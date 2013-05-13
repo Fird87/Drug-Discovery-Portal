@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<f:view xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:rich="http://richfaces.org/rich"
+       xmlns:a4j="http://richfaces.org/a4j"
+      >
+  <h:head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9"/>
+    <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-custom.css" type="text/css" media="screen" />
+    <script src="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.js"></script>
+  </h:head>
+  <h:body>
+    <a href="/portal/classic/page-just-added/page-just-added-Ltas">Back to LTAS</a>
+    <div id="editor"></div>
+    <div id="painter"></div>
+    <script>
+      var editor = chemwriter.loadEditor('editor', {
+        
+        enableClipboard: true,
+        appletPath: '#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-util.jar',
+        enableTools: [
+          'wildcard-atom-bond', 'wildcard-bond',
+          'atom-list', 'increase-r-group', 'decrease-r-group', 'crossed-bond', 'wavy-bond'
+        ],
+        disableImplicitHydrogenCount: ['Sn'],
+        molfile: '[NO NAME]\n  CHEMW2  0102110749032D                              \nCreated with ChemWriter - http://chemwriter.com\n 19 20  0  0  1  0            999 V2000\n   -5.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.1083   -3.6841    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -1.9520    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -2.8180    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -4.5501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -5.3591    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -5.0501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -4.0501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -3.7411    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  2  3  2  0  0  0  0\n  3  4  1  0  0  0  0\n  4  5  2  0  0  0  0\n  5  6  1  0  0  0  0\n  6  1  2  0  0  0  0\n  6  7  1  0  0  0  0\n  3  8  1  0  0  0  0\n  4  9  1  0  0  0  0\n  8 10  1  1  0  0  0\n  8 11  1  0  0  0  0\n 10 12  1  0  0  0  0\n 12 13  1  0  0  0  0\n 13 14  2  0  0  0  0\n 11 15  1  0  0  0  0\n 15 16  1  0  0  0  0\n 16 17  2  0  0  0  0\n 17 18  1  0  0  0  0\n 18 19  2  0  0  0  0\n 19 15  1  0  0  0  0\nM  END\n'
+      });
+      var painter = chemwriter.loadPainter('painter', {
+        
+        molfile: '[NO NAME]\n  CHEMW2  0102110749032D                              \nCreated with ChemWriter - http://chemwriter.com\n 19 20  0  0  1  0            999 V2000\n   -5.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.1083   -3.6841    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -1.9520    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -2.8180    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -4.5501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -5.3591    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -5.0501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -4.0501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -3.7411    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  2  3  2  0  0  0  0\n  3  4  1  0  0  0  0\n  4  5  2  0  0  0  0\n  5  6  1  0  0  0  0\n  6  1  2  0  0  0  0\n  6  7  1  0  0  0  0\n  3  8  1  0  0  0  0\n  4  9  1  0  0  0  0\n  8 10  1  1  0  0  0\n  8 11  1  0  0  0  0\n 10 12  1  0  0  0  0\n 12 13  1  0  0  0  0\n 13 14  2  0  0  0  0\n 11 15  1  0  0  0  0\n 15 16  1  0  0  0  0\n 16 17  2  0  0  0  0\n 17 18  1  0  0  0  0\n 18 19  2  0  0  0  0\n 19 15  1  0  0  0  0\nM  END\n'
+      });
+    </script>
+    
+  
+			<br />
+  </h:body>
+</f:view>

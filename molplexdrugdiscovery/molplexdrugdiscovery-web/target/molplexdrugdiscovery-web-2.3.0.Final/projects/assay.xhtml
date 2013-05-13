@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+ 
+        <h:head>
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+       
+        </h:head>
+        <h:body>
+      <h:form id="myform1">
+        	<!-- rich:panel-->
+                     		
+                 <fieldset>
+				  <legend>Assay Data Manager</legend>
+			  		<h:panelGroup style="display:block; text-align:center">
+										  <h:outputLabel value="Assay :" styleClass="font"/>
+					<h:selectOneMenu  id="prop"  value="#{assay.assay_id}"  >
+                		 <f:ajax execute="prop" render="dt" event="change" listener="#{experimentalResultAction.getAssayId}"/> 
+                		   <f:selectItem id="selectitem" itemLabel="Select Assay" itemValue="0"/>
+            			 <f:selectItems  value="#{experimentalResultAction.getAllAssay()}" var="a"
+   							itemLabel="#{a.assay_name}" itemValue="#{a.assay_id}" />
+   				 </h:selectOneMenu>
+   				   <h:panelGrid>
+         				  <h:inputHidden id="output" value="#{experimental_result.assay_id}" />
+           				</h:panelGrid>
+    				</h:panelGroup>
+    		   			<h:outputText value="&#160;" />
+                	<h:panelGroup style="display:block; text-align:center">
+                				 <rich:dataTable id="dt"  value="#{experimentalResultAction.searchStructureDetail()}" var="e" >
+						<rich:column>
+							<f:facet name="header">Structure id</f:facet>
+							<h:outputText value="#{e.structure_id}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">Value</f:facet>
+							<h:outputText value="#{e.value}"  />
+						</rich:column>
+					
+					  </rich:dataTable>
+					  </h:panelGroup>
+           
+  <!-- h:panelGroup><h:link title="Go to add assay page" value="Add new Assay?Click here" outcome="/portal/classic/Setup/Assay"></h:link></h:panelGroup-->
+<a href="/portal/classic/Setup/Assay">Add new Assay?Click here</a>
+        </fieldset>
+          <!-- /rich:panel-->
+
+                 </h:form>
+        
+     
+
+    </h:body>
+</f:view>
+</ui:composition>

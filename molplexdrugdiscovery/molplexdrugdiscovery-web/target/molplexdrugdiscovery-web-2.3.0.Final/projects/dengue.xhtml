@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      <f:view>
+        <h:head>
+        </h:head>
+        <h:body>
+           
+          
+        <rich:panel>
+            <rich:tabPanel switchType="client"  id="dengueTab" activeItem="#{tabBean.selectedTabInDengue}" >
+        <rich:tab header="Home" name="home">
+        Tab1
+        </rich:tab>
+        <rich:tab header="TPP" name="tpp">
+            <ui:include src="/projects/Tpp.xhtml" />
+        </rich:tab>
+        <rich:tab header="RTP" name="RTP">
+         <ui:include src="/projects/rtp.xhtml" />
+             
+        </rich:tab>
+        <rich:tab header="LeaderBoard" name="LeaderBoard">
+            <ui:include src="/chemvector/demo.xhtml" /> 
+        </rich:tab>
+        <rich:tab header="Assay" name="assay">
+          <ui:include src="/projects/assay.xhtml" />
+        </rich:tab>
+    </rich:tabPanel>
+    </rich:panel>
+     
+	</h:body>
+	</f:view>
+</ui:composition>

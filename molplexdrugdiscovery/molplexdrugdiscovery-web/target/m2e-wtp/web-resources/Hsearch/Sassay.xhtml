@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+	<h:head>
+	</h:head>
+		<style>
+         .style1 {
+	height: 50px;
+}
+</style>
+	<h:body>
+	 	 
+       <h:form>
+          <rich:panel bodyClass="style1">
+          <f:facet name="header">
+                    <h:panelGroup>
+                        <h:outputText value=" Assay Name " /><br/>
+                        <h:inputText value="#{experimentalResultAction.currentStateFilterValue}"  >
+                            <a4j:ajax event="keyup" render="table" execute="@this" />
+                        </h:inputText>
+                    </h:panelGroup>
+                </f:facet>
+                 <div style="height:40px ; width:100%; overflow-x:auto; overflow-y:scroll">
+        <rich:dataTable value="#{experimentalResultAction.allAssay}" var="a" id="table" rows="10">
+         <rich:column filterValue="#{experimentalResultAction.currentStateFilterValue}"
+                filterExpression="#{fn:containsIgnoreCase(a.assay_name,experimentalResultAction.currentStateFilterValue)}">
+                
+                <h:outputText value="#{a.assay_name}" />
+            </rich:column>
+           
+                   </rich:dataTable>   
+                   </div>    
+                 <center> <a href="/portal/classic/Setup/Assay">New Assay</a></center> 
+                 </rich:panel>
+    </h:form>
+  
+    </h:body>
+    </f:view>
+</ui:composition>

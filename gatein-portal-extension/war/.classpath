@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/spec/javax/faces/jboss-jsf-api_2.1_spec/2.0.0.Beta1/jboss-jsf-api_2.1_spec-2.0.0.Beta1.jar"/>
+</classpath>

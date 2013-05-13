@@ -1,0 +1,37 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich">
+	<f:view>
+		<h:head></h:head>
+			<h:body>
+			<h:form id="labform">
+	<h:outputText value="Lab Request : " />	
+	<h:inputText value="#{lab_request.lab_request_name}" />		
+	<h:selectOneRadio id="myRadio" layout="pageDirection" value="#{assay.assay_id}"> 
+	
+	<f:selectItems value="#{labChem.allAssay}" var="assay1" itemLabel="#{assay1.assay_name}" itemValue="#{assay1.assay_id}">  </f:selectItems>
+  	</h:selectOneRadio>
+							
+	
+  	<h:commandButton value="Save" action="#{labChem.update()}"></h:commandButton>
+							</h:form>
+							<a4j:outputPanel>
+					<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+						 autosized="true"
+						show="#{facesContext.maximumSeverity!=null}" >
+						<h:messages style="color:red" infoClass="info" errorClass="error" />
+						<center>
+							<a4j:commandLink value="OK" onclick="#{rich:component('msgPanel')}.hide()" 
+								reRender="myPanel" />
+						</center>
+					</rich:popupPanel>
+					</a4j:outputPanel>
+							</h:body>
+							</f:view>
+							</ui:composition>
+							

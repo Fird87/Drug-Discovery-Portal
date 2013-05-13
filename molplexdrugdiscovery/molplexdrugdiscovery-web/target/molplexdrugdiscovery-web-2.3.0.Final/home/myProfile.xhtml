@@ -1,0 +1,42 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+		<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/styleHome.css" type="text/css"/>
+		</h:head>
+		<h:body>
+			
+			<rich:panel  bodyClass="images">
+				<f:facet name="header">
+					<h:outputText value="My Profile" />
+				</f:facet>
+				<table>
+					<tr>
+						<td rowspan="3"><h:graphicImage
+								value="/home/images/david.jpg" width="80" height="100" /></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="#{currentUser.getUsername()}"/></td>
+					</tr>
+
+					<tr>
+
+						<td><a4j:commandLink value="Edit My Profile" /></td>
+					</tr>
+
+
+
+				</table>
+
+			</rich:panel>
+		</h:body>
+	</f:view>
+
+</ui:composition>

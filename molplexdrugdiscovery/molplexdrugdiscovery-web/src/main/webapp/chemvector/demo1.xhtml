@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	<h:head>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
+
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemvector.css" />
+		<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/demo.css" />
+		<link rel="stylesheet/chemical" type="application/json"
+			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemistry.json" />
+		<link rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.css"
+			type="text/css" media="screen" />
+		<link rel="stylesheet"
+			href="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-custom.css"
+			type="text/css" media="screen" />
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter.js"></script>
+
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/chemvector/lib/chemvector.js"></script>
+		<script>
+    var editor;
+      chemvector.browser.ImageLoader.init({
+        // startup parameters here
+      });
+
+      function molfilename(){
+
+
+var molname = document.getElementsByName('src');
+if(editor==null){
+ editor = chemwriter.loadEditor('editor', {
+    
+    enableClipboard: true,
+    appletPath: '#{facesContext.externalContext.requestContextPath}/sample-project/chemwriter-util.jar',
+    enableTools: [
+      'wildcard-atom-bond', 'wildcard-bond',
+      'atom-list', 'increase-r-group', 'decrease-r-group', 'crossed-bond', 'wavy-bond'
+    ],
+    disableImplicitHydrogenCount: ['Sn'],
+    molfile: '[NO NAME]\n  CHEMW2  0102110749032D                              \nCreated with ChemWriter - http://chemwriter.com\n 19 20  0  0  1  0            999 V2000\n   -5.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.1083   -3.6841    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -1.9520    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -2.8180    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -4.5501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -5.3591    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -5.0501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -4.0501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -3.7411    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  2  3  2  0  0  0  0\n  3  4  1  0  0  0  0\n  4  5  2  0  0  0  0\n  5  6  1  0  0  0  0\n  6  1  2  0  0  0  0\n  6  7  1  0  0  0  0\n  3  8  1  0  0  0  0\n  4  9  1  0  0  0  0\n  8 10  1  1  0  0  0\n  8 11  1  0  0  0  0\n 10 12  1  0  0  0  0\n 12 13  1  0  0  0  0\n 13 14  2  0  0  0  0\n 11 15  1  0  0  0  0\n 15 16  1  0  0  0  0\n 16 17  2  0  0  0  0\n 17 18  1  0  0  0  0\n 18 19  2  0  0  0  0\n 19 15  1  0  0  0  0\nM  END\n'
+  });
+  var painter = chemwriter.loadPainter('painter', {
+    
+    molfile: '[NO NAME]\n  CHEMW2  0102110749032D                              \nCreated with ChemWriter - http://chemwriter.com\n 19 20  0  0  1  0            999 V2000\n   -5.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.6083   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.1083   -3.6841    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1083   -3.6841    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1083   -1.9520    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -2.8180    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6083   -4.5501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -2.8180    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.1082   -1.9520    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6082   -4.5501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -5.3591    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -5.0501    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0694   -4.0501    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0205   -3.7411    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  2  3  2  0  0  0  0\n  3  4  1  0  0  0  0\n  4  5  2  0  0  0  0\n  5  6  1  0  0  0  0\n  6  1  2  0  0  0  0\n  6  7  1  0  0  0  0\n  3  8  1  0  0  0  0\n  4  9  1  0  0  0  0\n  8 10  1  1  0  0  0\n  8 11  1  0  0  0  0\n 10 12  1  0  0  0  0\n 12 13  1  0  0  0  0\n 13 14  2  0  0  0  0\n 11 15  1  0  0  0  0\n 15 16  1  0  0  0  0\n 16 17  2  0  0  0  0\n 17 18  1  0  0  0  0\n 18 19  2  0  0  0  0\n 19 15  1  0  0  0  0\nM  END\n'
+  });
+}
+#{rich:component('chemWriterPanel')}.show();
+
+          }
+    </script>
+	</h:head>
+	<h:body>
+	<rich:popupPanel id="chemWriterPanel" autosized="true" height="400"
+				width="600" top="200" domElementAttachment="form">
+				<a href="#" onclick="#{rich:component('chemWriterPanel')}.hide()">OK</a>
+		<div id="editor"></div>
+		<div id="painter"></div>
+		
+		
+		</rich:popupPanel>
+		<style>
+.align {
+	padding: 10px 0px 20px 140px;
+	width: 55%;
+}
+</style>
+		<h:form id="leaderboardForm">
+
+			<table border="1" style="border-color: #aaaaaa">
+				<tbody>
+					<tr>
+						<td colspan="5"><span style="float: left;"> <h:outputText
+									value="Leader Board" />
+
+						</span> <span style="float: right;"> <h:commandButton
+									image="/chemvector/images/cart.jpg"
+									title="Add molecule to your cart">
+									<rich:componentControl target="leaderBoardPanel"
+										operation="show" />
+								</h:commandButton>
+						</span></td>
+
+
+					</tr>
+					<tr>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()" >
+								<div class="structure" contenteditable="true">
+
+									<object id="myId" width="100%" height="100%"
+										class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/a1_cdl.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename();">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/a2_cdl.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/aculeacin-a.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/bacitracin-a.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/azlocillin.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/benzthiazide.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/butoconazole.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/cefuroxime.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/cholesterol.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/ciguatoxin.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/cobamide.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/digitonin.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/esperamicin-a1.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/felypressin.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="cell" contenteditable="true"
+								ondblclick="molfilename()">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/felypressin.mol" />
+									</object>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5"><span> <a4j:commandButton value="HIT"
+									id="HIT" execute="@this"
+									actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+
+								</a4j:commandButton></span> <span><a4j:commandButton value="LEAD" id="LEAD"
+									execute="@this"
+									actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+								</a4j:commandButton></span> <span><a4j:commandButton value="NOMINEE" id="NOMINEE"
+									execute="@this"
+									actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+								</a4j:commandButton></span> <span><a4j:commandButton value="CANDIDATE"
+									id="CANDIDATE" execute="@this"
+									actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+								</a4j:commandButton></span> <span><a4j:commandButton value="DRUG" id="DRUG"
+									execute="@this"
+									actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+								</a4j:commandButton></span></td>
+					</tr>
+				</tbody>
+			</table>
+			<rich:popupPanel id="leaderBoardPanel" autosized="true" height="200"
+				width="800" top="400" domElementAttachment="form">
+
+				<rich:dataTable value="table" var="dataValues" width="100%"
+					border="1">
+					<rich:column width="300" value="column1" var="columns" index="ind"
+						id="col1">
+						<f:facet name="header">
+							<h:outputText value="Lab Request" />
+						</f:facet>
+						<h:panelGrid columns="2">
+
+
+							<div class="cell" contenteditable="true">
+								<div class="structure" contenteditable="true">
+									<object width="100%" height="100%" class="chemvector-object">
+										<param name="src"
+											value="#{facesContext.externalContext.requestContextPath}/chemvector/data/a2_cdl.mol" />
+									</object>
+								</div>
+							</div>
+							<div>
+								<h:selectOneRadio id="myRadio0" layout="pageDirection">
+									<f:selectItem itemValue="Assay 1" itemLabel="Assay 1" />
+									<f:selectItem itemValue="Assay 1" itemLabel="Assay 1" />
+									<f:selectItem itemValue="Assay 1" itemLabel="Assay 1" />
+								</h:selectOneRadio>
+							</div>
+						</h:panelGrid>
+						<f:facet name="footer">
+							<h:panelGroup style="display:block; text-align:center">
+								<a4j:commandButton value="Submit" style=""></a4j:commandButton>
+							</h:panelGroup>
+						</f:facet>
+					</rich:column>
+
+					<rich:column width="300" value="column2" var="colum" index="ind"
+						id="col2">
+						<f:facet name="header">
+							<h:outputText value="Chemist Synthesis" />
+						</f:facet>
+						<rich:dataTable value="Synthesis" var="syn" rows="2" id="sublist">
+
+							<f:facet name="header">
+								<rich:columnGroup>
+									<rich:column rowspan="3">
+										<h:outputText value="cost" />
+									</rich:column>
+									<rich:column colspan="4">
+										<h:outputText value="time" />
+									</rich:column>
+									<rich:column>
+										<h:outputText value="risk" />
+									</rich:column>
+									<rich:column>
+										<h:outputText value="mg" />
+									</rich:column>
+								</rich:columnGroup>
+							</f:facet>
+						</rich:dataTable>
+						<f:facet name="footer">
+							<h:panelGroup style="display:block; text-align:center">
+								<a4j:commandButton value="Submit"></a4j:commandButton>
+							</h:panelGroup>
+						</f:facet>
+					</rich:column>
+
+					<rich:column width="300" value="column3" var="colu" index="ind"
+						id="col3">
+						<f:facet name="header">
+							<h:outputText value="Manager" />
+						</f:facet>
+						<h:panelGrid columns="2">
+							<h:outputText value="Approved" />
+							<h:outputText value=" Not Approved" />
+							<br />
+						</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:selectBooleanCheckbox />
+							<h:selectBooleanCheckbox />
+						</h:panelGrid>
+						<f:facet name="footer">
+							<h:panelGroup style="display:block; text-align:center">
+								<a4j:commandButton value="Submit"></a4j:commandButton>
+							</h:panelGroup>
+						</f:facet>
+					</rich:column>
+				</rich:dataTable>
+				<a href="#" onclick="#{rich:component('leaderBoardPanel')}.hide()">OK</a>
+
+			</rich:popupPanel>
+		</h:form>
+	</h:body>
+
+</f:view>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://jboss.org/schema/seam/components"
+	xmlns:core="http://jboss.org/schema/seam/core" xmlns:persistence="http://jboss.org/schema/seam/persistence"
+	xmlns:security="http://jboss.org/schema/seam/security" xmlns:drools="http://jboss.org/schema/seam/drools"
+	xmlns:web="http://jboss.org/schema/seam/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:transaction="http://jboss.com/products/seam/transaction"
+	xsi:schemaLocation="http://jboss.org/schema/seam/core http://jboss.org/schema/seam/core-2.3.xsd 
+                 http://jboss.org/schema/seam/persistence http://jboss.org/schema/seam/persistence-2.3.xsd
+                 http://jboss.org/schema/seam/components http://jboss.org/schema/seam/components-2.3.xsd
+                 http://jboss.org/schema/seam/security http://jboss.org/schema/seam/security-2.3.xsd
+                 http://jboss.org/schema/seam/web http://jboss.org/schema/seam/web-2.3.xsd
+                 http://jboss.org/schema/seam/drools http://jboss.org/schema/seam/drools-2.3.xsd
+                 http://jboss.com/products/seam/web http://jboss.com/products/seam/web-2.3.xsd">
+
+	<core:init jndi-pattern="java:app/molplexdrugdiscovery-ejb/#{ejbName}" debug="false" />
+
+	<component name="org.jboss.seam.transaction.facesTransactionEvents">
+		<property name="transactionFailedMessageEnabled">false</property>
+	</component>
+	<security:portal-identity authenticate-method="#{authenticator.authenticate}" />
+
+	<web:multipart-filter create-temp-files="true"
+		max-request-size="1000000" url-pattern="*.seam" />
+	<transaction:entity-transaction
+		entity-manager="#{entityManager}" />
+
+
+	<persistence:managed-persistence-context
+		name="entityManager" auto-create="true" 
+		persistence-unit-jndi-name="java:/seamspaceEntityManagerFactory"/>
+</components>

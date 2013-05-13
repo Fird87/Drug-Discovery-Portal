@@ -1,0 +1,16 @@
+action.package=org.molplexdrug.EntityBean
+action.sources=/molplexdrugdiscovery-ejb/src/main/java
+eclipse.preferences.version=1
+model.package=org.molplexdrug.EntityBean
+model.sources=/molplexdrugdiscovery-ejb/src/main/java
+seam.ejb.project=molplexdrugdiscovery-ejb
+seam.project.connection.profile=DefaultDS
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/molplexdrugdiscovery-web/src/main/webapp
+seam.runtime.name=jboss-seam-2.3.0.Final
+seam.settings.changed.by.user=true
+seam.test.creating=false
+seam.test.project=molplexdrugdiscovery-web
+test.package=org.domain.seamspaceweb.test
+test.sources=/molplexdrugdiscovery-web/src/main/resources

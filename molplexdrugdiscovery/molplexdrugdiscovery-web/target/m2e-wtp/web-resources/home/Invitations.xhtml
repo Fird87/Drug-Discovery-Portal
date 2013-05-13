@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+		<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/styleHome.css" type="text/css"/>
+		</h:head>
+		<h:body>
+
+
+			<rich:panel  bodyClass="images">
+				<f:facet name="header">
+					<h:outputText value="Invitations" />
+				</f:facet>
+				<table>
+					<tr>
+						<td>People(0)</td>
+						<td>Groups(0)</td>
+					</tr>
+				</table>
+
+			</rich:panel>
+
+		</h:body>
+	</f:view>
+
+</ui:composition>
+
+<!-- ui:composition xmlns="http://www.w3.org/1999/xhtml"
+     			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+       			xmlns:h="http://java.sun.com/jsf/html"
+      			xmlns:a4j="http://richfaces.org/a4j"
+      			xmlns:rich="http://richfaces.org/rich">
+<f:view>
+<h:body>
+<rich:panel>
+<f:facet name="header">
+              Invitations
+               </f:facet>
+              <rich:columnGroup>
+              	<rich:column>People(0)</rich:column>
+              <rich:column> | </rich:column>
+              <rich:column>
+               <a4j:commandLink value="Group" />
+              </rich:columnGroup> 
+               <h:outputText value="&#160;" />
+                   <h:outputText value="&#160;" />
+                <a4j:commandLink value="Find More" />
+</rich:panel>
+</h:body>
+</f:view>
+</ui:composition-->

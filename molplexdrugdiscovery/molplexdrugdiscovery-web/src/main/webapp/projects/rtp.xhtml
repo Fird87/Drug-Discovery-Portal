@@ -1,0 +1,233 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+		<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+			<f:verbatim>
+				<script type='text/JavaScript'>
+		function refresh()
+		{
+		   
+			
+			  location.reload()
+			
+		}
+
+		function dataTableSelectOneRadio(radio) {
+		    var radioId =document.getElementById("radio");
+		    radioId= radio.name.substring(radio.name.lastIndexOf(':'));
+
+		    for (var i = 0; i;&lt; radio.form.elements.length; i++) {
+		        var element = radio.form.elements[i];
+
+		        if (element.name.substring(element.name.lastIndexOf(':')) == radioId) {
+		            element.checked = false;
+		        }
+		    }
+
+		    radio.checked = true;
+		}
+
+	</script>
+	
+			</f:verbatim>
+
+
+		</h:head>
+		<h:body>
+			
+                <fieldset>
+                      <legend>RTP</legend>
+			<h:form id="myform">
+				<rich:panel bodyClass="align">
+					
+                   
+                 <rich:messages  id="message" ></rich:messages>
+					<h:panelGrid columns="3" >
+					
+						<h:outputText value="Compound Properties : " styleClass="font" />
+						
+						<h:inputText title="#{rtpAction.compundPropertyName}" id="cpName" value="#{rtpAction.compundPropertyName}" readonly="true" />
+						<h:outputLink value="#" style="font-size:large; color:black; textdecoration:none;" onclick="#{rich:component('rtpPanel')}.show();return false;" title="search compound">
+						<h:graphicImage value="/resources/images/icon-search-small.gif" />
+						</h:outputLink>
+						
+			          
+						<h:outputText value=" Logical Operator : " styleClass="font" />
+						<h:selectOneMenu id="loprop"
+							value="#{logicalOperator.logical_operator_id}"
+							style=" width : 130px;" required="true" requiredMessage="You need to insert logical operator"
+							validatorMessage="ERROR">
+							<f:selectItem itemLabel="Choose" />
+							<f:selectItems id="loh1" value="#{rtpAction.allLogicalOperator}"
+								var="c" itemLabel="#{c.logical_operator_symbol}"
+								itemValue="#{c.logical_operator_id}" />
+							<f:ajax event="change" execute="@this"
+								listener="#{rtpAction.getRtpLogicalOperatorId}" />
+							<f:validateRequired />
+							 <f:ajax event="blur" render="message"/>
+						</h:selectOneMenu>
+						<h:outputText/>
+					
+						<h:outputText value=" Value : "  styleClass="font"/>
+						<h:inputText label="Values" id="goalvalue" value="#{rtpGoal.rtp_goal_value}"
+							required="true" requiredMessage="You need to insert the value" validatorMessage="You need to insert the value" onfocus="{this.value = ''; }"
+							converter="javax.faces.Double" converterMessage="Please enter numeric only">
+							
+							<f:validateDoubleRange for="goalvalue" minimum="0.01"/>
+							<f:ajax event="blur" render="message"/>
+						</h:inputText>
+						<h:outputText/>
+						
+
+						<h:outputText value="Unit : " styleClass="font"/>
+						<h:inputText label="Units" id="unit"
+							value="#{rtpAction.compoundPropertyUnit}" readonly="true">
+						</h:inputText>
+						<h:outputText/>
+	<br></br>
+						<f:facet name="footer">
+							<h:panelGroup style="display:block; text-align:center">
+								<h:commandButton  value="Save" action="#{rtpAction.save()}">
+							<f:ajax onevent="@form" render="@form" />
+								</h:commandButton>
+								<h:commandButton id="rtpReset" value="Reset" type="reset"/>
+								
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<h:outputText />
+				<a4j:outputPanel id="myp" ajaxRendered="true">
+				<h:outputText value="&#160;" />
+					<rich:dataTable id="rtp_data" rows="10" value="#{rtpAction.all}" 
+						var="c" columnClasses="col">
+						<rich:column style="text-align:left;width:20%;">
+							<f:facet name="header">Compound Properties</f:facet>
+							<h:outputText value=" #{c.compound_property_name}" />
+						</rich:column>
+						<rich:column  style="text-align:center;width:8%;">
+							<f:facet name="header">Logical Operator</f:facet>
+							<h:outputText value=" #{c.logical_operator_symbol}" />
+						</rich:column>
+						<rich:column style="text-align:center;width:10%;">
+							<f:facet name="header">Value</f:facet>
+							<h:outputText value="#{c.rtp_goal_value}" />
+						</rich:column>
+						<rich:column style="text-align:left;width:8%;">
+							<f:facet name="header">Unit</f:facet>
+							<h:outputText value="#{c.compound_property_units}"></h:outputText>
+						</rich:column>
+					</rich:dataTable>
+					<rich:dataScroller for="rtp_data" maxPages="10"
+						styleClass="pagination-center" />
+				</a4j:outputPanel>
+					<a href="/portal/classic/Setup/CompoundProperties">Add Compound Property</a>
+	
+					
+<rich:popupPanel id="rtpPanel" autosized="true" height="500" width="800" top="140" domElementAttachment="form"  >
+			 <f:facet name="header">Add compound property</f:facet>
+		<f:facet name="controls">
+<h:outputLink value="#" style="font-size:large; color:black; textdecoration:
+none;" onclick="#{rich:component('rtpPanel')}.hide();return false;">
+<h:graphicImage value="/resources/images/close-button.gif" />
+
+</h:outputLink>
+</f:facet>
+ <rich:panel bodyClass="style1">
+          <f:facet name="header">
+                    <h:panelGroup>
+                    
+                        <h:outputText value=" Search " /><br/>
+                        <h:inputText value="#{rtpAction.currentStateFilterValue}"  >
+                            <a4j:ajax event="keyup" render="tablecp,selectradio" execute="@this"/>
+                        </h:inputText>
+                      
+                       
+                      </h:panelGroup>
+              
+                    </f:facet>     
+               
+                
+        <rich:dataTable  value="#{rtpAction.getAllRtpCompound()}" var="as"  id="tablecp" rows="10" noDataLabel="Compound not found" >
+   
+         <rich:column id="column" filterValue="#{rtpAction.currentStateFilterValue}"
+                filterExpression="#{fn:containsIgnoreCase(as.compound_property_name,rtpAction.currentStateFilterValue)}">
+            
+             <f:facet name="header"><h:outputText value="Compound Property Name" /></f:facet>
+              
+                  <h:selectOneRadio id="radio" layout="pageDirection" value="#{rtpAction.cpId}">
+<f:selectItem id="selectradio"  itemLabel="#{as.compound_property_name}" itemValue="#{as.compound_property_id}" />
+ 		<f:ajax event="change" execute="@this"  render="tablecp" listener="#{rtpAction.getRtpCompoundProperyId}" />
+</h:selectOneRadio>
+                
+  </rich:column>
+         
+              <rich:column>
+          <f:facet name="header"> <h:outputText value="Compound Property unit"></h:outputText></f:facet>
+           <h:outputText id="cpUnit" value="#{as.compound_property_units}"></h:outputText>
+        </rich:column>
+           
+                   </rich:dataTable>   
+              <rich:dataScroller for="tablecp" maxPages="10"
+						styleClass="pagination-center" />
+                 </rich:panel>
+	  <center>
+	  <a4j:commandButton value="Return" action="#{rtpAction.tabBean()}" render="cpName unit"  execute="rtpPanel"
+                oncomplete="#{rich:component('rtpPanel')}.hide();" />
+	  
+	  
+  </center>
+	</rich:popupPanel>
+					
+			</h:form>
+			</fieldset>
+			<a4j:outputPanel ajaxRendered="true">
+				<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+					autosized="true"
+					show="#{facesContext.maximumSeverity!=null}">
+					<h:messages style="color:red" infoClass="info" errorClass="error" />
+					<center>
+						<a4j:commandLink value="OK"
+							onclick="#{rich:component('msgPanel')}.hide()" reRender="myp" />
+					</center>
+				</rich:popupPanel>
+			</a4j:outputPanel>
+			
+			<!-- h:link value="Add Compound Property"
+				outcome="/projects/addproperties.xhtml" /-->
+			
+			<br />
+
+			<a4j:commandButton value="HIT" id="HIT" render="rtp_data"
+				execute="@this" actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+
+			</a4j:commandButton>
+
+			<a4j:commandButton value="LEAD" id="LEAD" render="rtp_data"
+				execute="@this" actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+			</a4j:commandButton>
+
+			<a4j:commandButton value="NOMINEE" id="NOMINEE" render="rtp_data"
+				execute="@this" actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+			</a4j:commandButton>
+
+			<a4j:commandButton value="CANDIDATE" id="CANDIDATE" render="rtp_data"
+				execute="@this" actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+			</a4j:commandButton>
+
+			<a4j:commandButton value="DRUG" id="DRUG" render="rtp_data"
+				execute="@this" actionListener="#{rtpAction.pageDevelopmentPhaseId}">
+			</a4j:commandButton>
+
+
+
+		</h:body>
+	</f:view>
+</ui:composition>

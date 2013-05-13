@@ -1,0 +1,204 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+		<h:head>
+		<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
+			<f:verbatim>
+				<script type="text/javascript">
+                function clearValues() {  
+                   
+                } 
+            </script>
+			</f:verbatim>
+
+		</h:head>
+		<h:body>
+			
+
+                <fieldset style="width: 85%;">
+                      <legend>Approved Therapy</legend>
+			<h:form id="appform">
+			       <rich:messages  id="message" ></rich:messages>
+					<h:panelGrid columns="6">
+					
+					<h:outputText value=" Name : " styleClass="font" />
+							<h:inputText id="apName"
+							value="#{approved_therapy.approved_therapy_name}" required="true" requiredMessage="You need to insert approved therapy name" >
+							    <f:validateLength minimum="1" maximum="50" />
+							    <f:ajax event="blur" render="message"/>
+							   </h:inputText>
+					
+						
+						
+						<h:outputText value=" Synonyms : " styleClass="font" />
+							<h:inputText id="synonyms"
+							value="#{approved_therapy.synonyms}"  required="true" requiredMessage="You need to insert synonyms"
+							>
+							    <f:validateLength minimum="1" maximum="50" />
+							    <f:ajax event="blur" render="message"/>
+						</h:inputText>
+						
+						
+						<h:outputText value=" TargetCondition : " styleClass="font" />
+							<h:inputText id="targetcondition"
+							value="#{approved_therapy.target_condition}"  required="true" requiredMessage="You need to insert target condition">
+							    <f:validateLength minimum="1" maximum="50" />
+							      <f:ajax event="blur" render="message"/>
+						</h:inputText>
+						
+						
+						<h:outputText value="GlobalIncidence : " styleClass="font" />
+							<h:inputText id="globalincidence"
+							value="#{approved_therapy.global_incidence}"  required="true"  validatorMessage="You need to insert global incidence" requiredMessage="You need to insert global incidence"
+							 onfocus="{this.value = ''; }" converter="javax.faces.Integer" converterMessage="Please enter numeric only">
+							    <f:validateDoubleRange for="globalincidence" minimum="1" />
+							        <f:ajax event="blur" render="message"/>
+						</h:inputText>
+					
+						
+						<h:outputText value=" Global Prevalance: " styleClass="font" />
+							<h:inputText id="globalprevalence"
+							value="#{approved_therapy.global_prevalence}"  required="true" validatorMessage="You need to insert global prevalance"  requiredMessage="You need to insert global prevalance"
+							onfocus="{this.value = ''; }" converter="javax.faces.Integer" converterMessage="Please enter numeric only">
+							    <f:validateDoubleRange for="globalprevalence" minimum="1" />
+							   
+							          <f:ajax event="blur" render="message"/>
+						</h:inputText>
+							
+						
+						<h:outputText value=" Global Sales : " styleClass="font" />
+							<h:inputText id="globalsales"
+							value="#{approved_therapy.global_sales}"  required="true" validatorMessage="You need to insert global sales" requiredMessage="You need to insert global sales"
+							onfocus="{this.value = ''; }" converter="javax.faces.Integer" converterMessage="Please enter numeric only"> 
+							    <f:validateDoubleRange for="globalsales" minimum="1" />
+						      <f:ajax event="blur" render="message"/>>
+						</h:inputText>
+							
+						<h:outputText value=" EconomicFactor : " styleClass="font" />
+							<h:inputText id="economicfactor"
+							value="#{approved_therapy.economic_factor}"  required="true" validatorMessage="You need to insert economic factor" requiredMessage="You need to insert economic factor"
+							onfocus="{this.value = ''; }" converter="javax.faces.Double" converterMessage="Please enter numeric only">
+							    <f:validateDoubleRange for="economicfactor" minimum="1" />
+						   <f:ajax event="blur" render="message"/>
+						</h:inputText>
+						
+					
+						<h:outputText value=" World Regions : " styleClass="font" />
+						<h:selectOneMenu id="WorldRegions"
+							value="#{world_regions.world_regions_id}"
+							style=" width : 130px;" required="true" requiredMessage="You need to select world region"
+							validatorMessage="ERROR">
+							<f:selectItem itemLabel="Choose" />
+							<f:selectItems id="wreg" value="#{appAction.allWorldRegions}"
+								var="w" itemLabel="#{w.worldRegionsName}"
+								itemValue="#{w.worldRegionsId}" />
+							<f:ajax event="change" execute="@this"
+								listener="#{appAction.getWorldregionsId}" />
+							<f:validateRequired />
+						     <f:ajax event="blur" render="message"/>
+						</h:selectOneMenu>
+					
+						
+						
+						
+						<h:outputText value=" Company : " styleClass="font" />
+						<h:selectOneMenu id="company"
+							value="#{company.company_id}"
+							style=" width : 130px;" required="true" requiredMessage="You need to select company"
+							validatorMessage="ERROR">
+							<f:selectItem itemLabel="Choose"  />
+							<f:selectItems id="cmp" value="#{appAction.allCompany}"
+								var="c" itemLabel="#{c.company_name}"
+								itemValue="#{c.company_id}" />
+							<f:ajax event="change" execute="@this"
+								listener="#{appAction.getAppCompanyId}" />
+							<f:validateRequired />
+							     <f:ajax event="blur" render="message" />
+						</h:selectOneMenu>
+						
+						
+
+						<f:facet name="footer">
+							<h:panelGroup style="display:block; text-align:center">
+								<a4j:commandButton value="Save" action="#{appAction.save()}">
+							<f:ajax onevent="@form" render="@form" />
+								</a4j:commandButton>
+								<h:commandButton id="rtpReset" value="Reset" type="reset"/>
+								
+							</h:panelGroup>
+						</f:facet>
+						
+					
+					</h:panelGrid>
+					
+				<h:panelGrid columns="1" >	
+					<a4j:outputPanel id="detailAprTherapy" ajaxRendered="true">
+				        <h:outputText value="&#160;" />
+					<rich:dataTable id="apptherapy_data" rows="5" value="#{appAction.allApprovedTherapy}"
+						var="detailApp" columnClasses="col">
+						<rich:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value=" #{detailApp.approvedTherapy}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">World Region</f:facet>
+							<h:outputText value=" #{detailApp.wolrdRegionName}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">Company</f:facet>
+							<h:outputText value="#{detailApp.company}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">Global Incidence</f:facet>
+							<h:outputText value="#{detailApp.globalIncidence}"></h:outputText>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">Global Prevalance</f:facet>
+							<h:outputText value="#{detailApp.globalPrevalance}"></h:outputText>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">Global Sales</f:facet>
+							<h:outputText value="#{detailApp.globalSales}"></h:outputText>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">Economic Factor</f:facet>
+							<h:outputText value="#{detailApp.economicFactor}"></h:outputText>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">Synonyms</f:facet>
+							<h:outputText value="#{detailApp.synonym}"></h:outputText>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">TargetCondition</f:facet>
+							<h:outputText value="#{detailApp.targetCondition}"></h:outputText>
+						</rich:column>
+					</rich:dataTable>
+					<rich:dataScroller for="apptherapy_data" maxPages="5"
+						styleClass="pagination-center" />
+				</a4j:outputPanel>
+				</h:panelGrid>
+					</h:form>
+					</fieldset>
+              <!-- popup panel -->
+			<a4j:outputPanel>
+					<rich:popupPanel id="msgPanel" modal="true" zindex="101"
+						 autosized="true"
+						show="#{facesContext.maximumSeverity!=null}" >
+						<h:messages style="color:red" infoClass="info" errorClass="error" />
+						<center>
+							<a4j:commandLink value="OK" onclick="#{rich:component('msgPanel')}.hide()" 
+								reRender="myPanel" />
+						</center>
+					</rich:popupPanel>
+					</a4j:outputPanel>
+					
+		</h:body>
+	</f:view>
+</ui:composition>

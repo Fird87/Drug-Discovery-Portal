@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<f:view>
+	<h:head>
+	</h:head>
+	<style>
+         .style1 {
+	height: 50px;
+}
+</style>
+	<h:body>
+	 	 
+       <h:form>
+       <rich:panel bodyClass="style1">
+      <f:facet name="header">
+                    <h:panelGroup>
+                        <h:outputText value=" Project Name " /><br/>
+                        <h:inputText value="#{projectAction.currentFilterValue}"  >
+                            <a4j:ajax event="keyup" render="table" execute="@this" />
+                        </h:inputText>
+                    </h:panelGroup>
+                </f:facet>
+                 <div style="height:40px ; width:100%; overflow-x:auto; overflow-y:scroll">
+        <rich:dataTable value="#{projectAction.allProject}" var="a" id="table" rows="1">
+         <rich:column filterValue="#{projectAction.currentFilterValue}"
+                filterExpression="#{fn:containsIgnoreCase(a.project_name,projectAction.currentFilterValue)}">
+          <a href="/portal/classic/page-just-added/page-just-added-Ltas" > LTAS</a>   <br/>
+          <a href="/portal/classic/page-just-added/page-just-added-Dengue" >DENGUE</a>   
+            </rich:column>
+           
+                   </rich:dataTable>    
+                   </div>   
+                 <center> <a href="/portal/classic/Setup/Projects">New Project</a></center> 
+                 </rich:panel>
+    </h:form>
+
+    </h:body>
+    </f:view>
+</ui:composition>
