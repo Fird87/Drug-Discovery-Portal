@@ -525,7 +525,7 @@ private MolPojo mPojo;
 			 messages = new Messages("The following LabRequest Has been created "+ sfLabRequest);
 			 em.merge(messages);
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lab Request Created Succesfully"));
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lab Request Created Succesfully"));
+			 //   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lab Request Created Succesfully"));
 			    savedlabRequest=true;
 			    lstChemistSynth=getChemisList(lstAddedLabRequestId);
 		}
