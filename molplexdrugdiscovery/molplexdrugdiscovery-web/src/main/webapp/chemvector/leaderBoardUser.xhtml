@@ -26,8 +26,8 @@
 		<script
 			src="#{facesContext.externalContext.requestContextPath}/chemvector/lib/chemvector.js"></script>
 		<script type='text/JavaScript'>
-		function URL(){
-			window.location.href="/portal/classic/page-just-added/page-just-added-Ltas";
+		function URL(path){
+			window.location.href=path;
 			}
 		function refresh()
 		{
@@ -84,7 +84,7 @@ if(editor==null){
 		        <f:facet name="header">
 							<h:outputText value="Lab Request" />
 						</f:facet>
-				<rich:dataTable id="lrTab" value="#{molAction.listmp}" var="dataValues" width="100%"
+				<rich:dataTable id="lrTab" value="#{molAction.lstLabrequest}" var="dataValues" width="100%"
 					border="1" >
 					<rich:column  value="column1" var="columns" index="ind" 
 						id="col1">
@@ -284,8 +284,12 @@ if(editor==null){
             <a4j:commandButton value="Cancel" onclick="#{rich:component('editPane')}.hide(); return false;" />
             	</center>
  </rich:popupPanel>
+ <a4j:commandButton image="/chemvector/images/BackToLeaderBoard.gif" id="backtoLb"
+									execute="@this"  
+									actionListener="#{molAction.resetList}"
+									oncomplete="URL('/portal/classic/page-just-added/page-just-added-Ltas');" >
+								</a4j:commandButton>
  
- <a href="/portal/classic/page-just-added/page-just-added-Ltas">Back To LeaderBoard</a>
  </rich:panel>
 </h:form>
 <!-- popup panel -->
