@@ -109,24 +109,22 @@ none;" onclick="#{rich:component('chemWriterPanel')}.hide();refresh();return fal
 
 						</span> 
 						 <span style="float: right;"> 
-							<h:commandButton
+					<h:commandButton
 									image="/chemvector/images/star.png"   
 									title="Rate the molecule" onclick="#{rich:component('ratingPanel')}.show();" action="#{molAction.getShowRatingAssign()}">
 									<rich:componentControl target="ratingPanel"
 										operation="hide" />	
 								</h:commandButton>
+									
 						</span>
 						<span style="float: right;"></span>
 						<span style="float: right;"> 
-								<!-- h:commandLink title="Add molecule to your cart" onclick="URL()" >
-								<h:graphicImage value="/chemvector/images/cart.jpg"/>
-										
-								</h:commandLink-->
 								
 								<a4j:commandButton image="/chemvector/images/cart.jpg" id="addcart"
-									execute="@this"  
+									execute="@this"  title="Add to Cart" 
 									actionListener="#{molAction.getShowLabRequestAssign}"
-									oncomplete="URL('/portal/classic/page-just-added/page-just-added-Ltas/LabRequest');" >
+									
+									oncomplete="if (#{facesContext.maximumSeverity==null}) {URL('/portal/classic/page-just-added/page-just-added-Ltas/LabRequest');}" >
 								</a4j:commandButton>
 								
 								

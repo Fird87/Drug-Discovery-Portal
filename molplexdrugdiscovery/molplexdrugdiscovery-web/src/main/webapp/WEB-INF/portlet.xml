@@ -1386,6 +1386,35 @@
             <value>true</value>
         </container-runtime-option>
     </portlet>
+    
+     <portlet>
+        <description>setUpManagerApproval</description>
+        <portlet-name>setUpManagerApproval</portlet-name>
+        <display-name>setUpManagerApproval</display-name>
+        <portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
+        <init-param>
+            <name>javax.portlet.faces.defaultViewId.view</name>
+            <value>/chemvector/setupManagerApproval.xhtml</value>
+        </init-param>
+        <init-param>
+            <name>javax.portlet.faces.preserveActionParams</name>
+            <value>true</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>VIEW</portlet-mode>
+            <portlet-mode>EDIT</portlet-mode>
+            <portlet-mode>HELP</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>setUpManagerApproval</title>
+        </portlet-info>
+        <container-runtime-option>
+            <name>org.gatein.pc.remotable</name>
+            <value>true</value>
+        </container-runtime-option>
+    </portlet>
 </portlet-app>
 
    

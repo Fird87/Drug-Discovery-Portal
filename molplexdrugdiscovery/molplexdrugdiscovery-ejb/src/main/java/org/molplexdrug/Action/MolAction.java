@@ -196,7 +196,7 @@ private MolPojo mPojo;
 				mol.setMolFile("[NO NAME]" + empSummary);
 				mol.setMolFileName((String) objects[2]);
 				mol.setRtp_id((Integer) objects[3]);
-				if(listmp.size()>0){
+			/*	if(listmp.size()>0){
 					int checkedMolIds;
 					for (MolPojo chkedObjects : listmp){
 						checkedMolIds=chkedObjects.getMolId();
@@ -208,7 +208,7 @@ private MolPojo mPojo;
 				}
 				else{
 					mol.setChecked(false);
-				}
+				}*/
 				pojo.add(mol);
 
 			} catch (SQLException e) {
@@ -273,6 +273,13 @@ private MolPojo mPojo;
 					e.printStackTrace();
 				}
 
+			}
+		}
+		else{
+			for(MolPojo mp:listmp){
+				if(molId.equals(mp.getMolId())){
+					listmp.remove(mp);
+				}
 			}
 		}
 		lstLabrequest=listmp;
@@ -885,59 +892,10 @@ public void resetRate(){
 //	System.out.println("---show rating false---");
 	//listmp = new ArrayList<MolPojo>();
 	showRating=false;
+	listmp = new ArrayList<MolPojo>();
 }
 
 public List<MolPojo> getLstLabrequest() {
-	//System.out.println("---inside getLstLabrequest---size of "+lstLabrequest.size());
-	/* List<MolPojo> lstLabRequest1 = new ArrayList<MolPojo>();
-		if (lstLabrequest.size() > 0) {
-			showlabRequest = true;
-			if(savedlabRequest==true){
-				for (MolPojo molpojo : lstLabrequest) {
-			//		System.out.println("-----addedMap------size----"+addedMap.size());
-					 Iterator it = addedMap.entrySet().iterator();
-					    while (it.hasNext()) {
-					        Map.Entry pairs = (Map.Entry)it.next();
-					      //  System.out.println("Saving into lab request"+pairs.getKey() + " = " + pairs.getValue());
-					        MolPojo mPojo=(MolPojo)pairs.getValue();
-					        Integer rtpId=mPojo.getRtp_id();
-					        Integer assayId=mPojo.getAssayId();
-					        if(molpojo.getRtp_id()==rtpId){
-					        molpojo.setAssayId(assayId);
-					        String query = "SELECT cs.lab_request.lab_request_id,cs.vendor_price,cs.manual_price,cs.vendor_time," +
-					    			" cs.manual_time,cs.vendor_risk,cs.manual_risk,cs.vendor_mg,cs.manual_mg,cs.manager_approval,cs.chemist_synthesis_id " +
-					    			" FROM ChemistSynthesis cs where cs.lab_request.rtp.rtp_id=:rtpId" +
-					    			" and cs.lab_request.assay.assay_id=:assayId";
-					    	Query q = em.createQuery(query);
-
-					    	q.setParameter("rtpId", rtpId);
-					    	q.setParameter("assayId", assayId);
-					    	List<Object[]> list = q.getResultList();
-					    	for (Object[] objects : list) {
-					    		molpojo.setChemist_synthesis_id((Integer) objects[10]);
-					    		molpojo.setLab_request_id((Integer) objects[0]);
-					    		molpojo.setVendor_price((Double) objects[1]);
-					    		molpojo.setManual_price((Double) objects[2]);
-					    		molpojo.setVendor_time((Integer) objects[3]);
-					    		molpojo.setManual_time((Integer) objects[4]);
-					    		molpojo.setVendor_risk((Integer) objects[5]);
-					    		molpojo.setManual_risk((Integer) objects[6]);
-					    		molpojo.setVendor_mg((Integer) objects[7]);
-					    		molpojo.setManual_mg((Integer) objects[8]);
-					    		molpojo.setManager_approval((String) objects[9]);
-					    	    }
-					        break;
-					        }
-					    }
-					    lstLabRequest1.add(molpojo);
-				}
-				lstLabrequest=lstLabRequest1;
-			}
-		}
-		else{
-			showlabRequest = false;
-		}*/
-	
 	return lstLabrequest;
 }
 
