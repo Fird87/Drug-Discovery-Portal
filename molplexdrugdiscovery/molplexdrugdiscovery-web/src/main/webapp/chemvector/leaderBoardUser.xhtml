@@ -123,91 +123,113 @@ if(editor==null){
 					
 					</rich:dataTable>
 				</rich:column>
-				<rich:column value="chemistSynthessis" var="colum" index="ind"
-						id="col2">	
-						<f:facet name="header">
-							<h:outputText value="Chemist Synthesis" />
-						</f:facet>
-	   <rich:dataTable id="csDataTable" value="#{molAction.lstChemistSynth}" var="csValues" width="100%"
-					border="1" iterationStatusVar="it" >
- <rich:column>
-  <f:facet name="header">#</f:facet>
-                #{it.index+1}
- </rich:column>
-						 <rich:column>
-                          <f:facet name="header">
-							<h:outputText value="LabRequestName" />
-						   </f:facet>
-						   <h:outputText id="lrName"  value="#{csValues.lab_request_name}"/>
-                          </rich:column>
-						 	<rich:column>
-						 	<f:facet name="header">
-							<h:outputText value="Type" />
-						   </f:facet>
-                            			<h:outputText value="Vendor" />
-                         <br></br>
-                                		<h:outputText value=" Manual" />
-                          </rich:column>
-                         
-       			 		<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Cost" style="width:50px;"/>
-       			 				</f:facet>
-       			 				
-                            		<h:outputText id="vp"  value="#{csValues.vendor_price}" style="width:50px;"   disabled="#{molAction.renderCol}">
-                            		</h:outputText><br />
-                           
-                                	<h:outputText id="mp"  value="#{csValues.manual_price}" style="width:50px;"  disabled="#{molAction.renderCol}">
-                                	</h:outputText>
-                          </rich:column>
-			 		<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Time" style="width:50px;"/>
-       			 				</f:facet>
-                            		<h:outputText id="vt"  value="#{csValues.vendor_time}" style="width:50px;"   disabled="#{molAction.renderCol}">
-                            		</h:outputText><br />
-                            
-                                	<h:outputText id="mt"  value="#{csValues.manual_time}" style="width:50px;"   disabled="#{molAction.renderCol}">
-                                	</h:outputText>
-                     </rich:column>
- 
-       			 	<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Risk" style="width:50px;"/>
-       			 				</f:facet>
-                            		<h:outputText id="vr"  value="#{csValues.vendor_risk}" style="width:50px;"   disabled="#{molAction.renderCol}">
-                            		</h:outputText><br />
-                            
-                                	<h:outputText id="mr"  value="#{csValues.manual_risk}" style="width:50px;"   disabled="#{molAction.renderCol}">
-                                	</h:outputText>
-                          
-       			 		</rich:column>
+			<rich:column value="chemistSynthessis" var="colum" index="ind"
+		id="col2">
+		<f:facet name="header">
+			<h:outputText value="Chemist Synthesis" />
+		</f:facet>
+		<rich:dataTable id="csDataTable" value="#{molAction.lstChemistSynth}"
+			var="csValues" width="100%" border="1" iterationStatusVar="it">
 
-       			 	<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Mg" style="width:50px;" />
-       			 				</f:facet>
-                            		<h:outputText id="vg"  value="#{csValues.vendor_mg}" style=" width :50px;"  disabled="#{molAction.renderCol}">
-                            		</h:outputText><br />
-                            
-                                	<h:outputText id="mg"  value="#{csValues.manual_mg}" style=" width : 50px;"   disabled="#{molAction.renderCol}">
-                                	</h:outputText>
- 						</rich:column>
- 						<rich:column>
- 						<a4j:commandLink styleClass="no-decor" render="editGrid" execute="@this" action="#{molAction.assignChemistSynthesisValuetoPopup(csValues)}"
-                    oncomplete="#{rich:component('editPane')}.show()" title="Edit this Record" >
-                    <h:graphicImage value="/chemvector/images/edit.gif" alt="edit" />
-                    <f:setPropertyActionListener target="#{molAction.mPojo}" value="#{csValues}" />
-                </a4j:commandLink>
- 						</rich:column>
-						<f:facet name="footer">
-							<h:panelGroup style="display:block; text-align:center">
-								<h:commandButton value="Submit" action="#{molAction.testRender1()}" disabled="#{molAction.renderCol}"></h:commandButton>
-							</h:panelGroup>
-						</f:facet>
-					
-</rich:dataTable>
-</rich:column>
+			<f:facet name="header">
+				<rich:columnGroup>
+					<rich:column>#</rich:column>
+					<rich:column>LabRequestName</rich:column>
+					<rich:column>Type</rich:column>
+					<rich:column>Cost</rich:column>
+					<rich:column>Time</rich:column>
+					<rich:column>Risk</rich:column>
+					<rich:column>Mg</rich:column>
+					<rich:column></rich:column>
+				</rich:columnGroup>
+			</f:facet>
+			<rich:columnGroup>
+				<rich:column rowspan="2">
+    	  #{it.index+1}
+    </rich:column>
+				<rich:column rowspan="2">
+					<h:outputText id="lrName" value="#{csValues.lab_request_name}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="Vendor" />
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="vp" value="#{csValues.vendor_price}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="vt" value="#{csValues.vendor_time}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="vr" value="#{csValues.vendor_risk}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="vg" value="#{csValues.vendor_mg}"
+						style=" width :50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+
+				</rich:column>
+				<rich:column rowspan="2">
+					<a4j:commandLink styleClass="no-decor" render="editGrid"
+						execute="@this"
+						action="#{molAction.assignChemistSynthesisValuetoPopup(csValues)}"
+						oncomplete="#{rich:component('editPane')}.show()"
+						title="Edit this Record">
+						<h:graphicImage value="/chemvector/images/edit.gif" alt="edit" />
+						<f:setPropertyActionListener target="#{molAction.mPojo}"
+							value="#{csValues}" />
+					</a4j:commandLink>
+				</rich:column>
+
+				<rich:column breakRowBefore="true">
+					<h:outputText value="Manual" />
+				</rich:column>
+				<rich:column>
+					<h:outputText id="mp" value="#{csValues.manual_price}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="mt" value="#{csValues.manual_time}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+				</rich:column>
+				<rich:column>
+					<h:outputText id="mr" value="#{csValues.manual_risk}"
+						style="width:50px;" disabled="#{molAction.renderCol}">
+					</h:outputText>
+
+				</rich:column>
+						<rich:column>
+					<h:outputText id="mg" value="#{csValues.manual_mg}"
+					style=" width : 50px;" disabled="#{molAction.renderCol}">
+				</h:outputText>
+
+				</rich:column>
+				
+			</rich:columnGroup>
+			<f:facet name="footer">
+				<h:panelGroup style="display:block; text-align:center">
+					<h:commandButton value="Submit" action="#{molAction.testRender1()}"
+						disabled="#{molAction.renderCol}"></h:commandButton>
+				</h:panelGroup>
+			</f:facet>
+		</rich:dataTable>
+
+	</rich:column>
 
 				</rich:dataTable>
 					<h:outputText value="&#160;" />
@@ -222,61 +244,73 @@ if(editor==null){
 </h:commandLink>
 </f:facet>
  <h:panelGrid columns="3" id="editGrid">
-   <rich:dataTable value="EditCs" var="car" iterationStatusVar="it" id="editCst" rows="1">
-						 	<rich:column>
-						 	<f:facet name="header">
-							<h:outputText value="Type" />
-						   </f:facet>
-                            			<h:outputText value="Vendor" />
-                         <br></br>
-                                		<h:outputText value=" Manual" />
-                          </rich:column>
-                         
-       			 		<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Cost" style="width:50px;"/>
-       			 				</f:facet>
-       			 				
-                            		<h:inputText id="vp"  value="#{chemistSynthesis.vendor_price}" style="width:50px;"  >
-                            		</h:inputText><br />
-                           
-                                	<h:inputText id="mp"  value="#{chemistSynthesis.manual_price}" style="width:50px;"   >
-                                	</h:inputText>
-                          </rich:column>
-			 		<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Time" style="width:50px;"/>
-       			 				</f:facet>
-                            		<h:inputText id="vt"  value="#{chemistSynthesis.vendor_time}" style="width:50px;"   >
-                            		</h:inputText><br />
-                            
-                                	<h:inputText id="mt"  value="#{chemistSynthesis.manual_time}" style="width:50px;"   >
-                                	</h:inputText>
-                     </rich:column>
- 
-       			 	<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Risk" style="width:50px;"/>
-       			 				</f:facet>
-                            		<h:inputText id="vr"  value="#{chemistSynthesis.vendor_risk}" style="width:50px;"   >
-                            		</h:inputText><br />
-                            
-                                	<h:inputText id="mr"  value="#{chemistSynthesis.manual_risk}" style="width:50px;"  >
-                                	</h:inputText>
-                          
-       			 		</rich:column>
+	<rich:dataTable value="EditCs" var="car" iterationStatusVar="it"
+			id="editCst" rows="1">
 
-       			 	<rich:column>
-       			 			<f:facet name="header">
-       			 				<h:outputText value="Mg" style="width:50px;" />
-       			 				</f:facet>
-                            		<h:inputText id="vg"  value="#{chemistSynthesis.vendor_mg}" style=" width :50px;"  >
-                            		</h:inputText><br />
-                            
-                                	<h:inputText id="mg"  value="#{chemistSynthesis.manual_mg}" style=" width : 50px;"  >
-                                	</h:inputText>
- 						</rich:column>
-   </rich:dataTable>
+			<f:facet name="header">
+				<rich:columnGroup>
+
+					<rich:column>Type</rich:column>
+					<rich:column>Cost</rich:column>
+					<rich:column>Time</rich:column>
+					<rich:column>Risk</rich:column>
+					<rich:column>Mg</rich:column>
+
+				</rich:columnGroup>
+			</f:facet>
+			<rich:columnGroup>
+
+				<rich:column>
+					<h:outputText value="Vendor" />
+				</rich:column>
+				<rich:column>
+					<h:inputText id="vp" value="#{chemistSynthesis.vendor_price}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+				<rich:column>
+					<h:inputText id="vt" value="#{chemistSynthesis.vendor_time}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+				<rich:column>
+					<h:inputText id="vr" value="#{chemistSynthesis.vendor_risk}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+
+				<rich:column>
+					<h:inputText id="vg" value="#{chemistSynthesis.vendor_mg}"
+						style=" width :50px;">
+					</h:inputText>
+				</rich:column>
+				<rich:column breakRowBefore="true">
+					<h:outputText value="Manual" />
+				</rich:column>
+				<rich:column>
+					<h:inputText id="mp" value="#{chemistSynthesis.manual_price}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+				<rich:column>
+					<h:inputText id="mt" value="#{chemistSynthesis.manual_time}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+				<rich:column>
+					<h:inputText id="mr" value="#{chemistSynthesis.manual_risk}"
+						style="width:50px;">
+					</h:inputText>
+				</rich:column>
+			
+				<rich:column>
+					<h:inputText id="mg" value="#{chemistSynthesis.manual_mg}"
+						style=" width : 50px;">
+					</h:inputText>
+				</rich:column>
+			</rich:columnGroup>
+	
+		</rich:dataTable>
    </h:panelGrid>
    	<center>
    <a4j:commandButton value="Store" action="#{molAction.saveChemistSynthesis(molAction.mPojo.chemist_synthesis_id,chemistSynthesis)}" render="csDataTable"  execute="editPane"

@@ -7,6 +7,7 @@
       xmlns:b="http://richfaces.org/sandbox/bootstrap">
       <f:view>
         <h:head>
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
         <script type='text/JavaScript'>
 		function refresh()
 		{
@@ -22,7 +23,7 @@
            
          
         <rich:panel>
-            <rich:tabPanel switchType="client"  id="LTASTab" activeItem="#{tabBean.selectedTab}"  >
+            <rich:tabPanel switchType="client"  id="LTASTab" activeItem="#{tabBean.selectedTab}" >
         <rich:tab header="Home" name="home" id="home">
         Tab1
         </rich:tab>

@@ -53,7 +53,7 @@
 					
 						<h:outputText value="Compound Properties : " styleClass="font" />
 						
-						<h:inputText title="#{rtpAction.compundPropertyName}" id="cpName" value="#{rtpAction.compundPropertyName}" readonly="true" />
+						<h:inputText title="#{rtpAction.compundPropertyName}" id="cpName" value="#{rtpAction.compundPropertyName}" readonly="true"  style="width:165px;"/>
 						<h:outputLink value="#" style="font-size:large; color:black; textdecoration:none;" onclick="#{rich:component('rtpPanel')}.show();return false;" title="search compound">
 						<h:graphicImage value="/resources/images/icon-search-small.gif" />
 						</h:outputLink>
@@ -62,8 +62,9 @@
 						<h:outputText value=" Logical Operator : " styleClass="font" />
 						<h:selectOneMenu id="loprop"
 							value="#{logicalOperator.logical_operator_id}"
-							style=" width : 130px;" required="true" requiredMessage="You need to insert logical operator"
-							validatorMessage="ERROR">
+							style=" width : 165px;" required="true" requiredMessage="You need to insert logical operator"
+							validatorMessage="ERROR"
+							>
 							<f:selectItem itemLabel="Choose" />
 							<f:selectItems id="loh1" value="#{rtpAction.allLogicalOperator}"
 								var="c" itemLabel="#{c.logical_operator_symbol}"
@@ -78,7 +79,7 @@
 						<h:outputText value=" Value : "  styleClass="font"/>
 						<h:inputText label="Values" id="goalvalue" value="#{rtpGoal.rtp_goal_value}"
 							required="true" requiredMessage="You need to insert the value" validatorMessage="You need to insert the value" onfocus="{this.value = ''; }"
-							converter="javax.faces.Double" converterMessage="Please enter numeric only">
+							converter="javax.faces.Double" converterMessage="Please enter numeric only" style=" width : 165px;">
 							
 							<f:validateDoubleRange for="goalvalue" minimum="0.01"/>
 							<f:ajax event="blur" render="message"/>
@@ -88,7 +89,7 @@
 
 						<h:outputText value="Unit : " styleClass="font"/>
 						<h:inputText label="Units" id="unit"
-							value="#{rtpAction.compoundPropertyUnit}" readonly="true">
+							value="#{rtpAction.compoundPropertyUnit}" readonly="true" style=" width : 165px;">
 						</h:inputText>
 						<h:outputText/>
 	<br></br>
