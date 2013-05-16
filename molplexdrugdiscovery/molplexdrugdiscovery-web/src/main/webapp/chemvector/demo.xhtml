@@ -7,7 +7,7 @@
 	<h:head>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
-
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" type="text/css"/>
 		<link rel="stylesheet" type="text/css"
 			href="#{facesContext.externalContext.requestContextPath}/chemvector/stylesheets/chemvector.css" />
 		<link rel="stylesheet" type="text/css"
@@ -104,7 +104,7 @@ none;" onclick="#{rich:component('chemWriterPanel')}.hide();refresh();return fal
 		<table border="1" style="border-color: #aaaaaa">
 				<tbody>
 					<tr>
-						<td colspan="5"><span style="float: left;"> <h:outputText
+						<td colspan="5" class="leaderboardStyle"><span style="float: left;"> <h:outputText
 									value="Leader Board" />
 
 						</span> 
@@ -120,7 +120,7 @@ none;" onclick="#{rich:component('chemWriterPanel')}.hide();refresh();return fal
 						<span style="float: right;"></span>
 						<span style="float: right;"> 
 								
-								<a4j:commandButton image="/chemvector/images/cart.jpg" id="addcart"
+								<a4j:commandButton image="/chemvector/images/cart.png" id="addcart"
 									execute="@this"  title="Add to Cart" 
 									actionListener="#{molAction.getShowLabRequestAssign}"
 									
