@@ -1,13 +1,12 @@
 package org.molplexdrug.Action;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.persistence.EntityManager;
@@ -20,7 +19,7 @@ import javax.persistence.criteria.Root;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
-import org.jboss.seam.faces.FacesMessages;
+import org.jboss.seam.faces.Redirect;
 import org.jboss.seam.log.Log;
 import org.molplexdrug.DAO.ProjectDAO;
 import org.molplexdrug.EntityBean.Messages;
@@ -55,6 +54,9 @@ public class ProjectAction implements ProjectDAO{
 	 @In(create = true, required = false)
 		private Messages messages;
 	   
+	 @In
+	 Redirect redirect;
+	 
 		   @PersistenceContext
 		   private EntityManager em;
 		   
@@ -74,7 +76,9 @@ public class ProjectAction implements ProjectDAO{
         
 		private boolean flag;
 		
-
+		public String asname ;
+		
+		public String projectname;
 		
 
 		public boolean isFlag() {
@@ -259,13 +263,88 @@ public class ProjectAction implements ProjectDAO{
 		 public Filter<?> getFilterProject() {
 		        return new Filter<Project>() {
 		            public boolean accept(Project a) {
-		                String asname = getCurrentFilterValue();
-		                if (asname == null || asname.length() == 0 || asname.equalsIgnoreCase(asname)) {
+		                asname = getCurrentFilterValue();
+		                if (asname == null || asname.length() == 0 || asname.equalsIgnoreCase(a.getProject_name())) {
+		                	projectname= a.getProject_name();
+		                	System.out.println(projectname);
 		                    return true;
 		                }
 		                return false;
 		            }
 		        };
 		    }
+		 
+	/*public String redirectPage(AjaxBehaviorEvent event){
+			 String page="";
+			  Object obj=event.getComponent().getAttributes().get("value");
+			//  if(null!=obj)
+                  projectname=(String)obj;
+		   
+			 System.out.println("Im redirecting");
+			 if(projectname.equalsIgnoreCase("LTAS")){
+				 System.out.println(projectname.toString());
+				 return  "/projects/ltas.xhtml";
+			 }
+			 else if(projectname.equalsIgnoreCase("dengue"))
+			 {
+				 System.out.println(projectname.toString());
+				 return "/portal/classic/page-just-added/page-just-added-Dengue";
+			 }
+			return page;
+			 
+			
+		 }
+*/
+		 public String redirectPage(AjaxBehaviorEvent event){
+			
+			  Object obj=event.getComponent().getAttributes().get("value");
+			  return projectname=(String)obj;
+		 }
+		 
+		 public String redirect(){
+			 String page="";
+		
+			
+			// System.out.println("Im redirecting");
+			 if(projectname.equalsIgnoreCase("LTAS")){
+				 System.out.println(projectname.toString());
+		  	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+				 try {
+					ec.redirect("/portal/classic/page-just-added/page-just-added-Ltas");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 return page;
+			 }
+			 else if(projectname.equalsIgnoreCase("dengue"))
+			 {
+				 System.out.println(projectname.toString());
+				 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			   	 try {
+					ec.redirect("/portal/classic/page-just-added/page-just-added-Dengue");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 return page;
+			 }
+			return page;
+			 
+			
+		 }
+
+
+		public String getProjectname() {
+			return projectname;
+		}
+
+
+		public void setProjectname(String projectname) {
+			this.projectname = projectname;
+		}
+
+
+		
 		 
 }

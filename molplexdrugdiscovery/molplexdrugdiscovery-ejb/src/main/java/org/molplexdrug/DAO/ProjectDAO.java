@@ -32,5 +32,8 @@ public interface ProjectDAO {
 	 public void setCurrentFilterValue(String currentFilterValue);
      public boolean isFlag(); 
      public void setFlag(boolean flag);
-
+     public String redirectPage(AjaxBehaviorEvent event);
+     public String getProjectname() ;
+ 	public void setProjectname(String projectname);
+    public String redirect();
 }

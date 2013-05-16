@@ -27,11 +27,13 @@
                     </h:panelGroup>
                 </f:facet>
                  <div style="height:40px ; width:100%; overflow-x:auto; overflow-y:scroll">
-        <rich:dataTable value="#{projectAction.allProject}" var="a" id="table" rows="1">
+        <rich:dataTable value="#{projectAction.allProject}" var="a" id="table" rows="2">
          <rich:column filterValue="#{projectAction.currentFilterValue}"
                 filterExpression="#{fn:containsIgnoreCase(a.project_name,projectAction.currentFilterValue)}">
-          <a href="/portal/classic/page-just-added/page-just-added-Ltas" > LTAS</a>   <br/>
-          <a href="/portal/classic/page-just-added/page-just-added-Dengue" >DENGUE</a>   
+                <h:commandLink id="link" value="#{a.project_name}" action="#{projectAction.redirect}" >
+                   <f:ajax execute="link" listener="#{projectAction.redirectPage}"></f:ajax>
+                </h:commandLink>
+                
             </rich:column>
            
                    </rich:dataTable>    
